@@ -16,7 +16,7 @@ public class UserSeeder implements CommandLineRunner {
   public void run(String... args) throws Exception {
     repository.deleteAll();
 
-    repository.save(new User("Alice", "Smith"));
-    repository.save(new User("Bob", "Smith"));
+    repository.save(new User("Alice", "Smith", "alice@test.com", "password", "Project Manager in Google"));
+    repository.save(new User("Bob", "Smith", "bob@test.com", "password", "It's just Bob"));
   }
 }
