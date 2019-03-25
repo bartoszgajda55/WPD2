@@ -3,6 +3,8 @@ package com.gcu.wpd2.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document
 public class User {
   @Id
@@ -12,7 +14,7 @@ public class User {
   private String email;
   private String password;
   private String bio;
-  private String projects;
+  private List<Project> projects;
 
   public User() {
   }
@@ -53,7 +55,7 @@ public class User {
     return bio;
   }
 
-  public String getProjects() {
+  public List<Project> getProjects() {
     return projects;
   }
 
