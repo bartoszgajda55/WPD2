@@ -15,6 +15,7 @@ public class Project {
   private Date starDate;
   private Date endDate;
   private List<Milestone> milestones;
+  private List<User> sharedWith;
 
   public String getId() {
     return id;
@@ -38,6 +39,10 @@ public class Project {
 
   public List<Milestone> getMilestones() {
     return milestones;
+  }
+
+  public List<User> getSharedWith() {
+    return sharedWith;
   }
 
   public void setName(String name) {
