@@ -12,6 +12,7 @@ public class Milestone {
   private String name;
   private String content;
   private Date deadline;
+  private boolean isCompleted;
 
   public Milestone(String name, String content) {
     this(name, content, null);
@@ -39,6 +40,10 @@ public class Milestone {
     return deadline;
   }
 
+  public boolean isCompleted() {
+    return isCompleted;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -49,6 +54,10 @@ public class Milestone {
 
   public void setDeadline(Date deadline) {
     this.deadline = deadline;
+  }
+
+  public void setCompleted(boolean completed) {
+    isCompleted = completed;
   }
 
   @Override
