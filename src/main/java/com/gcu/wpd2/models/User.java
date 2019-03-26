@@ -2,11 +2,15 @@ package com.gcu.wpd2.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 @Document
-public class User {
+public class User implements UserDetails {
   @Id
   private String id;
   private String firstName;
@@ -15,6 +19,7 @@ public class User {
   private String password;
   private String bio;
   private List<Project> projects;
+  private List<GrantedAuthority> grantedAuthorities;
 
   public User() {
   }
@@ -31,6 +36,12 @@ public class User {
     this.bio = bio;
   }
 
+  public User(String username, String password, String[] authorities) {
+    this.username = username;
+    this.password = password;
+    this.grantedAuthorities = AuthorityUtils.createAuthorityList(authorities);
+  }
+
   public String getId() {
     return id;
   }
@@ -43,10 +54,12 @@ public class User {
     return lastName;
   }
 
+  @Override
   public String getUsername() {
     return username;
   }
 
+  @Override
   public String getPassword() {
     return password;
   }
@@ -80,9 +93,41 @@ public class User {
   }
 
   @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return null;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return false;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return false;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return false;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return false;
+  }
+
+  @Override
   public String toString() {
-    return String.format(
-      "Customer[id=%s, firstName='%s', lastName='%s']",
-      id, firstName, lastName);
+    return "User{" +
+      "id='" + id + '\'' +
+      ", firstName='" + firstName + '\'' +
+      ", lastName='" + lastName + '\'' +
+      ", username='" + username + '\'' +
+      ", password='" + password + '\'' +
+      ", bio='" + bio + '\'' +
+      ", projects=" + projects +
+      ", grantedAuthorities=" + grantedAuthorities +
+      '}';
   }
 }
