@@ -4,10 +4,14 @@ body {
 }
 
 body {
-  display: -ms-flexbox;
   display: flex;
   padding-top: 56px;
   background-color: #f5f5f5;
+}
+
+.signed-in {
+  display: flex;
+  align-items: center;
 }
 
 .form-signin {

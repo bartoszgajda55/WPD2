@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
     <head>
-        <title>Spring Security Example</title>
+        <title>Home - WPD2</title>
     </head>
     <body>
-        <div layout:fragment="content">
+        <main>
             <h1>Welcome!</h1>
-
-        <p>Click <a th:href="@{/dashboard}">here</a> to see a dashboard.</p>
-        </div>
+            <p>Click <a th:href="@{/dashboard}">here</a> to see a dashboard.</p>
+        </main>
     </body>
 </html>
