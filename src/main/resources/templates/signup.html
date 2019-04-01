@@ -5,7 +5,7 @@
 </head>
 <body>
     <main>
-        <form class="form-signin" th:action="@{/signup}" method="post">
+        <form class="form" th:action="@{/signup}" method="post">
             <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
             <h1 class="h3 mb-3 font-weight-normal">Signup Here</h1>
             <div th:if="${param.error}">
@@ -18,11 +18,11 @@
             <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
-            <label for="inputFullname" class="sr-only">Full Name</label>
-            <input type="text" name="fullname" id="inputFullname" class="form-control" placeholder="Fullname" required="" />
+            <label for="inputFirstName" class="sr-only">First Name</label>
+            <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="First Name" required="" />
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
         </form>
-        <form class="form-signin" th:action="@{/login}" method="get">
+        <form class="form" th:action="@{/login}" method="get">
             <button class="btn btn-md btn-success btn-block" type="Submit">Sign In</button>
         </form>
     </main>
