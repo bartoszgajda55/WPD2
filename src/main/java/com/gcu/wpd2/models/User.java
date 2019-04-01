@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "user")
 public class User {
     @Id
@@ -14,6 +16,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String bio;
+    private List<Project> projects;
 
     public User(String email, String password, String firstName, String lastName, String bio) {
         this.email = email;
@@ -50,6 +53,10 @@ public class User {
         return bio;
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -68,5 +75,17 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+          "id='" + id + '\'' +
+          ", email='" + email + '\'' +
+          ", firstName='" + firstName + '\'' +
+          ", lastName='" + lastName + '\'' +
+          ", bio='" + bio + '\'' +
+          ", projects=" + projects +
+          '}';
     }
 }
