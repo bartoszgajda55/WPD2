@@ -1,10 +1,8 @@
 package com.gcu.wpd2.services;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import com.gcu.wpd2.models.Role;
 import com.gcu.wpd2.models.User;
 import com.gcu.wpd2.db.RoleRepository;
@@ -24,8 +22,6 @@ public class MongoUserDetailsService implements UserDetailsService {
   @Autowired
   private UserRepository userRepository;
   @Autowired
-  private RoleRepository roleRepository;
-  @Autowired
   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   public User findUserByEmail(String email) {
@@ -34,8 +30,6 @@ public class MongoUserDetailsService implements UserDetailsService {
 
   public void saveUser(User user) {
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    Role userRole = roleRepository.findByRole("ADMIN");
-    user.setRoles(new HashSet<>(Arrays.asList(userRole)));
     userRepository.save(user);
   }
 
