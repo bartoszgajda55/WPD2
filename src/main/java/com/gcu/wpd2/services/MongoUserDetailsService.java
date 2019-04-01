@@ -1,11 +1,8 @@
 package com.gcu.wpd2.services;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import com.gcu.wpd2.models.Role;
 import com.gcu.wpd2.models.User;
-import com.gcu.wpd2.db.RoleRepository;
 import com.gcu.wpd2.db.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
