@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Dashboard - WPD2</title>
+</head>
+<body>
+    <main>
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h2>This is your Admin Dashboard</h2>
+    </main>
+</body>
+</html>

@@ -1,88 +1,91 @@
 package com.gcu.wpd2.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document
+@Document(collection = "user")
 public class User {
-  @Id
-  private String id;
-  private String firstName;
-  private String lastName;
-  private String email;
-  private String password;
-  private String bio;
-  private List<Project> projects;
+    @Id
+    private String id;
+    @Indexed(unique = true)
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String bio;
+    private List<Project> projects;
 
-  public User() {
-  }
+    public User(String email, String password, String firstName, String lastName, String bio) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.bio = bio;
+    }
 
-  public User(String email, String password) {
-    this("", "", email, password, "");
-  }
+    public User() {
+    }
 
-  public User(String firstName, String lastName, String email, String password, String bio) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
-    this.bio = bio;
-  }
+    public String getId() {
+        return id;
+    }
 
-  public String getId() {
-    return id;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public String getFirstName() {
-    return firstName;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public String getLastName() {
-    return lastName;
-  }
+    public String getFirstName() {
+        return firstName;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public String getLastName() {
+        return lastName;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public String getBio() {
+        return bio;
+    }
 
-  public String getBio() {
-    return bio;
-  }
+    public List<Project> getProjects() {
+        return projects;
+    }
 
-  public List<Project> getProjects() {
-    return projects;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
-  public void setBio(String bio) {
-    this.bio = bio;
-  }
-
-  @Override
-  public String toString() {
-    return String.format(
-      "Customer[id=%s, firstName='%s', lastName='%s']",
-      id, firstName, lastName);
-  }
+    @Override
+    public String toString() {
+        return "User{" +
+          "id='" + id + '\'' +
+          ", email='" + email + '\'' +
+          ", firstName='" + firstName + '\'' +
+          ", lastName='" + lastName + '\'' +
+          ", bio='" + bio + '\'' +
+          ", projects=" + projects +
+          '}';
+    }
 }
