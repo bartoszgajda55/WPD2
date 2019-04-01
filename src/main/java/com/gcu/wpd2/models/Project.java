@@ -15,15 +15,13 @@ public class Project {
   private Date starDate;
   private Date endDate;
   private List<Milestone> milestones;
-  private List<User> sharedWith;
 
-  public Project(String name, String description, Date starDate, Date endDate, List<Milestone> milestones, List<User> sharedWith) {
+  public Project(String name, String description, Date starDate, Date endDate, List<Milestone> milestones) {
     this.name = name;
     this.description = description;
     this.starDate = starDate;
     this.endDate = endDate;
     this.milestones = milestones;
-    this.sharedWith = sharedWith;
   }
 
   public String getId() {
@@ -48,10 +46,6 @@ public class Project {
 
   public List<Milestone> getMilestones() {
     return milestones;
-  }
-
-  public List<User> getSharedWith() {
-    return sharedWith;
   }
 
   public void setName(String name) {
