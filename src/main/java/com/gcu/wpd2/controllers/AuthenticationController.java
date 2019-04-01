@@ -62,7 +62,7 @@ public class AuthenticationController {
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("currentUser", user);
         modelAndView.addObject("fullName", "Welcome " + user.getFirstName());
-        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+        modelAndView.addObject("adminMessage", "Dashboard available only for logged in Users");
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }
