@@ -1,24 +1,37 @@
 package com.gcu.wpd2.jobs;
 
+import com.gcu.wpd2.db.ProjectRepository;
 import com.gcu.wpd2.db.UserRepository;
+import com.gcu.wpd2.models.Project;
 import com.gcu.wpd2.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
+
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
   @Autowired
   private BCryptPasswordEncoder bCryptPasswordEncoder;
   @Autowired
-  private UserRepository repository;
+  private UserRepository userRepository;
+  @Autowired
+  private ProjectRepository projectRepository;
 
   @Override
   public void run(String... args) {
-    repository.deleteAll();
+    userRepository.deleteAll();
 
-    repository.save(new User("alice@test.com", bCryptPasswordEncoder.encode("password"), "Alice", "Smith", "Project Manager in Google"));
-    repository.save(new User("bob@test.com", bCryptPasswordEncoder.encode("password"), "Bob", "Smith", "It's just Bob"));
+    User bob = new User("alice@test.com", bCryptPasswordEncoder.encode("password"), "Alice", "Smith", "Project Manager in Google");
+    User alice = new User("bob@test.com", bCryptPasswordEncoder.encode("password"), "Bob", "Smith", "It's just Bob");
+    userRepository.save(bob);
+    userRepository.save(alice);
+
+    Project wpd2 = new Project("WPD2", "Web Platform Development 2", Calendar.getInstance(), Calendar.getInstance());
+    Project ip3 = new Project("IP3", "Integrated Project 3", Calendar.getInstance(), Calendar.getInstance());
+    projectRepository.save(wpd2);
+    projectRepository.save(ip3);
   }
 }
