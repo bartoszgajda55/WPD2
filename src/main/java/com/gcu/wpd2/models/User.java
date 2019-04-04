@@ -16,7 +16,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String bio;
-    private List<Project> projects;
+    private List<String> projects;
 
     public User(String email, String password, String firstName, String lastName, String bio) {
         this.email = email;
@@ -53,7 +53,7 @@ public class User {
         return bio;
     }
 
-    public List<Project> getProjects() {
+    public List<String> getProjects() {
         return projects;
     }
 

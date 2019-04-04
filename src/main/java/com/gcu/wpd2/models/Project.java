@@ -3,7 +3,8 @@ package com.gcu.wpd2.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Document
@@ -12,14 +13,18 @@ public class Project {
   private String id;
   private String name;
   private String description;
-  private Date starDate;
-  private Date endDate;
+  private Calendar startDate;
+  private Calendar endDate;
   private List<Milestone> milestones;
 
-  public Project(String name, String description, Date starDate, Date endDate, List<Milestone> milestones) {
+  public Project(String name, String description, Calendar starDate, Calendar endDate) {
+    this(name, description, starDate, endDate, new ArrayList<>());
+  }
+
+  public Project(String name, String description, Calendar starDate, Calendar endDate, List<Milestone> milestones) {
     this.name = name;
     this.description = description;
-    this.starDate = starDate;
+    this.startDate = starDate;
     this.endDate = endDate;
     this.milestones = milestones;
   }
@@ -36,11 +41,11 @@ public class Project {
     return description;
   }
 
-  public Date getStarDate() {
-    return starDate;
+  public Calendar getStartDate() {
+    return startDate;
   }
 
-  public Date getEndDate() {
+  public Calendar getEndDate() {
     return endDate;
   }
 
@@ -56,11 +61,11 @@ public class Project {
     this.description = description;
   }
 
-  public void setStarDate(Date starDate) {
-    this.starDate = starDate;
+  public void setStartDate(Calendar startDate) {
+    this.startDate = startDate;
   }
 
-  public void setEndDate(Date endDate) {
+  public void setEndDate(Calendar endDate) {
     this.endDate = endDate;
   }
 
@@ -70,7 +75,7 @@ public class Project {
       "id='" + id + '\'' +
       ", name='" + name + '\'' +
       ", description='" + description + '\'' +
-      ", starDate=" + starDate +
+      ", startDate=" + startDate +
       ", endDate=" + endDate +
       ", milestones=" + milestones +
       '}';
