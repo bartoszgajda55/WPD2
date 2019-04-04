@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserSeeder implements CommandLineRunner {
+public class DatabaseSeeder implements CommandLineRunner {
   @Autowired
   private BCryptPasswordEncoder bCryptPasswordEncoder;
   @Autowired
