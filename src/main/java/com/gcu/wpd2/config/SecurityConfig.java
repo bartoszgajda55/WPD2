@@ -44,16 +44,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http
       .authorizeRequests()
-      .antMatchers("/").permitAll()
-      .antMatchers("/login").permitAll()
-      .antMatchers("/signup").permitAll().anyRequest()
-      .authenticated().and().csrf().disable().formLogin()
-      .loginPage("/login").failureUrl("/login?error=true")
-      .usernameParameter("email")
-      .passwordParameter("password")
-      .and().logout()
-      .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-      .logoutSuccessUrl("/").and().exceptionHandling();
+        .antMatchers("/").permitAll()
+        .antMatchers("/login").permitAll()
+        .antMatchers("/signup").permitAll().anyRequest()
+      .authenticated().and().csrf().disable()
+      .formLogin()
+        .loginPage("/login")
+        .defaultSuccessUrl("/dashboard")
+        .failureUrl("/login?error=true")
+        .usernameParameter("email")
+        .passwordParameter("password")
+      .and()
+      .logout()
+        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .logoutSuccessUrl("/").and()
+      .exceptionHandling();
   }
 
   @Override

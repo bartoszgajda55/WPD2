@@ -57,11 +57,6 @@ public class AuthenticationController {
         modelAndView.addObject("successMessage", "User has been registered successfully");
         modelAndView.addObject("user", new User());
         modelAndView.setViewName("login");
-//        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
-//        token.setDetails(new WebAuthenticationDetails(request));
-//        Authentication authentication = authenticationManager.authenticate(token);
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        userService.loadUserByUsername(user.getEmail());
         return modelAndView;
     }
 
