@@ -1,11 +1,16 @@
 package com.gcu.wpd2.controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import com.gcu.wpd2.models.User;
 import com.gcu.wpd2.services.MongoUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +22,8 @@ public class AuthenticationController {
 
     @Autowired
     private MongoUserDetailsService userService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView viewLoginPage() {
@@ -35,7 +42,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView createUserFromSignupForm(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createUserFromSignupForm(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
@@ -45,11 +52,16 @@ public class AuthenticationController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("signup");
             return modelAndView;
-        } else {
-            userService.saveUser(user);
-            modelAndView.setViewName("login");
-
         }
+        userService.saveUser(user);
+        modelAndView.addObject("successMessage", "User has been registered successfully");
+        modelAndView.addObject("user", new User());
+        modelAndView.setViewName("login");
+//        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+//        token.setDetails(new WebAuthenticationDetails(request));
+//        Authentication authentication = authenticationManager.authenticate(token);
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        userService.loadUserByUsername(user.getEmail());
         return modelAndView;
     }
 

@@ -24,8 +24,8 @@ public class DatabaseSeeder implements CommandLineRunner {
   public void run(String... args) {
     userRepository.deleteAll();
 
-    User bob = new User("alice@test.com", bCryptPasswordEncoder.encode("password"), "Alice", "Smith", "Project Manager in Google");
-    User alice = new User("bob@test.com", bCryptPasswordEncoder.encode("password"), "Bob", "Smith", "It's just Bob");
+    User alice = new User("alice@test.com", bCryptPasswordEncoder.encode("password"), "Alice", "Smith", "Project Manager in Google");
+    User bob = new User("bob@test.com", bCryptPasswordEncoder.encode("password"), "Bob", "Smith", "It's just Bob");
     userRepository.save(bob);
     userRepository.save(alice);
 
@@ -33,5 +33,9 @@ public class DatabaseSeeder implements CommandLineRunner {
     Project ip3 = new Project("IP3", "Integrated Project 3", Calendar.getInstance(), Calendar.getInstance());
     projectRepository.save(wpd2);
     projectRepository.save(ip3);
+
+    bob.addProject(wpd2.getId());
+    bob.addProject(ip3.getId());
+    userRepository.save(bob);
   }
 }

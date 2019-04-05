@@ -1,5 +1,6 @@
 package com.gcu.wpd2.models;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,7 +11,7 @@ import java.util.List;
 @Document
 public class Project {
   @Id
-  private String id;
+  private ObjectId _id;
   private String name;
   private String description;
   private Calendar startDate;
@@ -29,8 +30,8 @@ public class Project {
     this.milestones = milestones;
   }
 
-  public String getId() {
-    return id;
+  public ObjectId getId() {
+    return _id;
   }
 
   public String getName() {
@@ -72,7 +73,7 @@ public class Project {
   @Override
   public String toString() {
     return "Project{" +
-      "id='" + id + '\'' +
+      "_id='" + _id + '\'' +
       ", name='" + name + '\'' +
       ", description='" + description + '\'' +
       ", startDate=" + startDate +
