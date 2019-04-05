@@ -18,6 +18,9 @@ public class Project {
   private Calendar endDate;
   private List<Milestone> milestones;
 
+  public Project() {
+  }
+
   public Project(String name, String description, Calendar starDate, Calendar endDate) {
     this(name, description, starDate, endDate, new ArrayList<>());
   }
