@@ -3,32 +3,22 @@ package com.gcu.wpd2.services;
 import java.util.Arrays;
 import java.util.List;
 import com.gcu.wpd2.models.User;
-import com.gcu.wpd2.db.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MongoUserDetailsService implements UserDetailsService {
-
   @Autowired
-  private UserRepository userRepository;
-  @Autowired
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-  public void saveUserAndHashPassword(User user) {
-    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    userRepository.save(user);
-  }
+  private UserService userService;
 
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    User user = userRepository.findByEmail(email);
+    User user = userService.findByEmail(email);
     if(user != null) {
       List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("user"));
       return buildUserForAuthentication(user, authorities);
