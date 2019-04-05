@@ -21,11 +21,7 @@ public class MongoUserDetailsService implements UserDetailsService {
   @Autowired
   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-  public User findUserByEmail(String email) {
-    return userRepository.findByEmail(email);
-  }
-
-  public void saveUser(User user) {
+  public void saveUserAndHashPassword(User user) {
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
     userRepository.save(user);
   }
