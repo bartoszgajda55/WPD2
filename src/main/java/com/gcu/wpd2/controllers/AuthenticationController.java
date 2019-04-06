@@ -1,8 +1,6 @@
 package com.gcu.wpd2.controllers;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import com.gcu.wpd2.models.User;
 import com.gcu.wpd2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

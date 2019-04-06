@@ -3,22 +3,20 @@ package com.gcu.wpd2.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-
 @Document
 public class Milestone {
   @Id
   private String id;
   private String name;
   private String content;
-  private Date deadline;
+  private String deadline;
   private boolean isCompleted;
 
   public Milestone(String name, String content) {
     this(name, content, null);
   }
 
-  public Milestone(String name, String content, Date deadline) {
+  public Milestone(String name, String content, String deadline) {
     this.name = name;
     this.content = content;
     this.deadline = deadline;
@@ -36,7 +34,7 @@ public class Milestone {
     return content;
   }
 
-  public Date getDeadline() {
+  public String getDeadline() {
     return deadline;
   }
 
@@ -52,7 +50,7 @@ public class Milestone {
     this.content = content;
   }
 
-  public void setDeadline(Date deadline) {
+  public void setDeadline(String deadline) {
     this.deadline = deadline;
   }
 
