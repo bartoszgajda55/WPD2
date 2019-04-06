@@ -4,8 +4,35 @@
     <title>Create Project - WPD2</title>
 </head>
 <body>
-<main>
-    <p>Create Project</p>
-</main>
+    <main>
+        <div class="row my-4">
+            <div class="col">
+                <h2>Create a new Project</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form class="form" th:action="@{/project}" method="post">
+                    <div class="form-group">
+                        <label for="projectName">Name</label>
+                        <input type="text" class="form-control" id="projectName" placeholder="Enter Project name">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Description</label>
+                        <input type="text" class="form-control" id="projectDescription" placeholder="Enter Project description">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectStartDate">Start Date</label>
+                        <input type="date" class="form-control" id="projectStartDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectEndDate">End Date</label>
+                        <input type="date" class="form-control" id="projectEndDate">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Project</button>
+                </form>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
