@@ -14,18 +14,18 @@ public class Project {
   private ObjectId _id;
   private String title;
   private String description;
-  private Calendar startDate;
-  private Calendar endDate;
+  private String startDate;
+  private String endDate;
   private List<Milestone> milestones;
 
   public Project() {
   }
 
-  public Project(String name, String description, Calendar starDate, Calendar endDate) {
+  public Project(String name, String description, String starDate, String endDate) {
     this(name, description, starDate, endDate, new ArrayList<>());
   }
 
-  public Project(String title, String description, Calendar starDate, Calendar endDate, List<Milestone> milestones) {
+  public Project(String title, String description, String starDate, String endDate, List<Milestone> milestones) {
     this.title = title;
     this.description = description;
     this.startDate = starDate;
@@ -45,11 +45,11 @@ public class Project {
     return description;
   }
 
-  public Calendar getStartDate() {
+  public String getStartDate() {
     return startDate;
   }
 
-  public Calendar getEndDate() {
+  public String getEndDate() {
     return endDate;
   }
 
@@ -65,11 +65,11 @@ public class Project {
     this.description = description;
   }
 
-  public void setStartDate(Calendar startDate) {
+  public void setStartDate(String startDate) {
     this.startDate = startDate;
   }
 
-  public void setEndDate(Calendar endDate) {
+  public void setEndDate(String endDate) {
     this.endDate = endDate;
   }
 
