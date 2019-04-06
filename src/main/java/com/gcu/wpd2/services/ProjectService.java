@@ -2,6 +2,7 @@ package com.gcu.wpd2.services;
 
 import com.gcu.wpd2.db.ProjectRepository;
 import com.gcu.wpd2.models.Project;
+import com.gcu.wpd2.models.User;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,12 @@ public class ProjectService {
 
   public void save(Project project) {
     this.projectRepository.save(project);
+  }
+
+  public void saveToUser(Project project, User user) {
+    this.projectRepository.save(project);
+    user.getProjects().add(project.getId());
+    userService.saveUser(user);
   }
 
   public List<Project> getAllByUserEmail(String email) {
