@@ -12,12 +12,24 @@
         </div>
         <div class="row">
             <div class="col">
-                <div class="card mb-3" th:each="project: ${userProjects}">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${project.getName()}"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted" th:text="${project.getEndDate().getTime().toLocaleString()}"></h6>
-                        <p class="card-text" th:text="${project.getDescription()}"></p>
-                        <a href="#" class="card-link">View More</a>
+                <div th:if="${userProjects != null and !userProjects.isEmpty()}">
+                    <div class="card mb-3" th:each="project: ${userProjects}">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${project.getName()}"></h5>
+                            <h6 class="card-subtitle mb-2 text-muted" th:text="${project.getEndDate().getTime().toLocaleString()}"></h6>
+                            <p class="card-text" th:text="${project.getDescription()}"></p>
+                            <a href="#" class="card-link">View More</a>
+                        </div>
+                    </div>
+                </div>
+                <div th:unless="${userProjects != null and !userProjects.isEmpty()}">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">No Projects found</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"></h6>
+                            <p class="card-text">You don't have any projects yet. Start by adding your very first one.</p>
+                            <a href="#" class="card-link">Add your first Project</a>
+                        </div>
                     </div>
                 </div>
             </div>
