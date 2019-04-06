@@ -5,14 +5,14 @@
 </head>
 <body>
     <main>
-        <div class="row">
+        <div class="row my-4">
             <div class="col">
                 <h2>Hello <span th:text="${currentUser.getFirstName()}"></span></h2>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <div class="card" th:each="project: ${userProjects}">
+                <div class="card mb-3" th:each="project: ${userProjects}">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${project.getName()}"></h5>
                         <h6 class="card-subtitle mb-2 text-muted" th:text="${project.getEndDate().getTime().toLocaleString()}"></h6>
