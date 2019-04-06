@@ -1,11 +1,11 @@
 package com.gcu.wpd2.controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import com.gcu.wpd2.models.User;
-import com.gcu.wpd2.services.MongoUserDetailsService;
+import com.gcu.wpd2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,19 +14,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AuthenticationController {
-
     @Autowired
-    private MongoUserDetailsService userService;
+    private UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login() {
+    public ModelAndView viewLoginPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public ModelAndView signup() {
+    public ModelAndView viewSignupPage() {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("user", user);
@@ -35,40 +34,26 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createUserFromSignupForm(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getEmail());
+        User userExists = userService.findByEmail(user.getEmail());
         if (userExists != null) {
-            bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the username provided");
+            bindingResult.rejectValue("email", "error.user",
+              "There is already a user registered with the username provided");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("signup");
-        } else {
-            userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new User());
-            modelAndView.setViewName("login");
-
+            return modelAndView;
         }
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public ModelAndView dashboard() {
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("currentUser", user);
-        modelAndView.addObject("fullName", "Welcome " + user.getFirstName());
-        modelAndView.addObject("adminMessage", "Dashboard available only for logged in Users");
-        modelAndView.setViewName("dashboard");
+        userService.saveUserAndHashPassword(user);
+        modelAndView.addObject("successMessage", "User has been registered successfully");
+        modelAndView.addObject("user", new User());
+        modelAndView.setViewName("login");
         return modelAndView;
     }
     
     @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
-    public ModelAndView home() {
+    public ModelAndView viewHomePage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("home");
         return modelAndView;
