@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 
 @Controller
@@ -24,13 +23,15 @@ public class DashboardController {
   @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
   public ModelAndView getDashboardPage() {
     ModelAndView modelAndView = new ModelAndView();
+
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     User user = userService.findByEmail(auth.getName());
-    List<Project> projects = projectService.getAll();
+    List<Project> projects = projectService.getAllByUserEmail(user.getEmail());
 
     modelAndView.addObject("currentUser", user);
     modelAndView.addObject("userProjects", projects);
     modelAndView.setViewName("dashboard");
+
     return modelAndView;
   }
 }

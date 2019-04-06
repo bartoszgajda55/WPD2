@@ -2,9 +2,12 @@ package com.gcu.wpd2.services;
 
 import com.gcu.wpd2.db.UserRepository;
 import com.gcu.wpd2.models.User;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -24,5 +27,9 @@ public class UserService {
 
   public User findByEmail(String email) {
     return userRepository.findByEmail(email);
+  }
+
+  public List<ObjectId> getUserProjectIdsByEmail(String email) {
+    return userRepository.findByEmail(email).getProjects();
   }
 }
