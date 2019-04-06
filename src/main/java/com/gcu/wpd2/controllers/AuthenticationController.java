@@ -34,7 +34,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView createUserFromSignupForm(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
+    public ModelAndView createUserFromSignupForm(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findByEmail(user.getEmail());
         if (userExists != null) {
