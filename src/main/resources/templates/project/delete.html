@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Delete Project - WPD2</title>
+</head>
+<body>
+    <main class="project-page project-edit">
+        <div class="row my-4">
+            <div class="col">
+                <h2>Delete Project</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form class="form" th:object="${project}" th:action="@{/project}" th:method="delete">
+                    <h2>Are you sure you want to delete project: <span th:text="${project.getTitle()}"></span></h2>
+                    <input type="hidden" th:value="${project.getId()}" name="id" id="projectId">
+                    <button type="submit" class="btn btn-danger">Delete Project</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
