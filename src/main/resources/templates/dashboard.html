@@ -7,7 +7,10 @@
     <main>
         <div class="row my-4">
             <div class="col">
-                <h2>Hello <span th:text="${currentUser.getFirstName()}"></span></h2>
+                <h2>My Projects</h2>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <a class="btn btn-primary d-flex align-items-center" th:href="@{/project/create}">Add new Project</a>
             </div>
         </div>
         <div class="row">
