@@ -21,6 +21,9 @@
                 <div th:if="${param.projectUpdated}" class="alert alert-success" role="alert">
                     Project updated successfully!
                 </div>
+                <div th:if="${param.projectDeleted}" class="alert alert-success" role="alert">
+                    Project deleted successfully!
+                </div>
                 <div th:if="${userProjects != null and !userProjects.isEmpty()}">
                     <div class="card mb-3" th:each="project: ${userProjects}">
                         <div class="card-body">
@@ -29,7 +32,7 @@
                             <p class="card-text" th:text="${project.getDescription()}"></p>
                             <a href="#" class="btn btn-primary">View</a>
                             <a th:href="@{/project/edit/{projectId}(projectId = ${project.getId()})}" class="btn btn-warning">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
+                            <a th:href="@{/project/delete/{projectId}(projectId = ${project.getId()})}" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                 </div>

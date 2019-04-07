@@ -67,4 +67,24 @@ public class ProjectController {
     modelAndView.setViewName("redirect:/dashboard");
     return modelAndView;
   }
+
+  @RequestMapping(value = "/project/delete/{projectId}", method = RequestMethod.GET)
+  public ModelAndView getDeleteProjectPage(@PathVariable ObjectId projectId) {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("project", projectService.getById(projectId));
+    modelAndView.setViewName("project/delete");
+    return modelAndView;
+  }
+
+  @RequestMapping(value = "/project", method = RequestMethod.DELETE)
+  public ModelAndView deleteProject(@Valid Project project) {
+    ModelAndView modelAndView = new ModelAndView();
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    User user = userService.findByEmail(auth.getName());
+    this.userService.deleteUserProjectByEmail(user.getEmail(), project.getId());
+    this.projectService.delete(project);
+    modelAndView.addObject("projectDeleted", true);
+    modelAndView.setViewName("redirect:/dashboard");
+    return modelAndView;
+  }
 }
