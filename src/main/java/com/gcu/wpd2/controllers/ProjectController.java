@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +23,15 @@ public class ProjectController {
   private ProjectService projectService;
   @Autowired
   private UserService userService;
+
+  @RequestMapping(value = "/project/view/{projectId}", method = RequestMethod.GET)
+  public ModelAndView getProjectDetailsPage(@PathVariable ObjectId projectId) {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("project", projectService.getById(projectId));
+    modelAndView.setViewName("project/view");
+    return  modelAndView;
+  }
+
 
   @RequestMapping(value = "/project/create", method = RequestMethod.GET)
   public ModelAndView getCreateProjectPage() {

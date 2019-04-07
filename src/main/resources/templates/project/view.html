@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Project Details - WPD2</title>
+</head>
+<body>
+<main class="viewMore">
+    <div class="row my-4">
+        <div class="col">
+            <h2>Project Details</h2>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <a class="btn btn-primary d-flex align-items-center" th:href="@{/dashboard}">Go back</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+
+                <tbody>
+                <tr>
+                    <th scope="row">Title</th>
+                    <td th:text="${project.getTitle()}"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Description</th>
+                    <td th:text="${project.getDescription()}"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Start Date</th>
+                    <td th:text="${project.getStartDate()}"> </td>
+
+                </tr>
+                <tr>
+                    <th scope="row">End Date</th>
+                    <td th:text="${project.getEndDate()}"></td>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</main>
+</body>
+</html>
