@@ -56,4 +56,8 @@ public class ProjectService {
     return projectsNameId;
   }
 
+  public void update(Project project) {
+    this.projectRepository.save(project);
+  }
+
 }
