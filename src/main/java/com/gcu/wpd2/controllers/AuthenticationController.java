@@ -18,6 +18,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView viewLoginPage() {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(new User());
         modelAndView.setViewName("login");
         return modelAndView;
     }
@@ -44,9 +45,8 @@ public class AuthenticationController {
             return modelAndView;
         }
         userService.saveUserAndHashPassword(user);
-        modelAndView.addObject("successMessage", "User has been registered successfully");
-        modelAndView.addObject("user", new User());
-        modelAndView.setViewName("login");
+        modelAndView.addObject("registered", true);
+        modelAndView.setViewName("redirect:/login");
         return modelAndView;
     }
     
