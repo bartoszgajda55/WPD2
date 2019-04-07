@@ -60,4 +60,8 @@ public class ProjectService {
     this.projectRepository.save(project);
   }
 
+  public void delete(Project project) {
+    this.projectRepository.delete(project);
+  }
+
 }
