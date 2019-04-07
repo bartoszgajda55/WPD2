@@ -17,6 +17,7 @@ public class Project {
   private List<Milestone> milestones;
 
   public Project() {
+    this("", "", "", "", new ArrayList<>());
   }
 
   public Project(String name, String description, String starDate, String endDate) {

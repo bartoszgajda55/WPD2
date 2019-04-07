@@ -33,6 +33,7 @@ public class User {
     }
 
     public User() {
+        this("", "", "N/A", "N/A", "N/A", new ArrayList<>());
     }
 
     public ObjectId getId() {
