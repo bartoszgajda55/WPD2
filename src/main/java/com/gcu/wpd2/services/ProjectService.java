@@ -23,7 +23,7 @@ public class ProjectService {
   }
 
   public Project getById(ObjectId id) {
-    return this.projectRepository.findBy_id(id);
+    return this.projectRepository.findById(id);
   }
 
   public Project getByName(String name) {
@@ -54,6 +54,10 @@ public class ProjectService {
       projectsNameId.put(objectId, this.getById(objectId).getTitle());
     });
     return projectsNameId;
+  }
+
+  public void update(Project project) {
+    this.projectRepository.save(project);
   }
 
 }
