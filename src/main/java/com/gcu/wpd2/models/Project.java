@@ -9,7 +9,7 @@ import java.util.List;
 @Document
 public class Project {
   @Id
-  private ObjectId _id;
+  private ObjectId id;
   private String title;
   private String description;
   private String startDate;
@@ -17,14 +17,15 @@ public class Project {
   private List<Milestone> milestones;
 
   public Project() {
-    this("", "", "", "", new ArrayList<>());
+    this(null, "", "", "", "", new ArrayList<>());
   }
 
-  public Project(String name, String description, String starDate, String endDate) {
-    this(name, description, starDate, endDate, new ArrayList<>());
+  public Project(ObjectId id, String name, String description, String starDate, String endDate) {
+    this(id, name, description, starDate, endDate, new ArrayList<>());
   }
 
-  public Project(String title, String description, String starDate, String endDate, List<Milestone> milestones) {
+  public Project(ObjectId id, String title, String description, String starDate, String endDate, List<Milestone> milestones) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.startDate = starDate;
@@ -33,7 +34,7 @@ public class Project {
   }
 
   public ObjectId getId() {
-    return _id;
+    return id;
   }
 
   public String getTitle() {
@@ -56,6 +57,10 @@ public class Project {
     return milestones;
   }
 
+  public void setId(ObjectId id) {
+    this.id = id;
+  }
+
   public void setTitle(String title) {
     this.title = title;
   }
@@ -75,7 +80,7 @@ public class Project {
   @Override
   public String toString() {
     return "Project{" +
-      "_id='" + _id + '\'' +
+      "_id='" + id + '\'' +
       ", name='" + title + '\'' +
       ", description='" + description + '\'' +
       ", startDate=" + startDate +
