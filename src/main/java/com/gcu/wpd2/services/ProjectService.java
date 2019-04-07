@@ -23,7 +23,7 @@ public class ProjectService {
   }
 
   public Project getById(ObjectId id) {
-    return this.projectRepository.findBy_id(id);
+    return this.projectRepository.findById(id);
   }
 
   public Project getByName(String name) {
