@@ -62,7 +62,6 @@ public class ProjectController {
   @RequestMapping(value = "/project", method = RequestMethod.PUT)
   public ModelAndView updateProject(@Valid Project project) {
     ModelAndView modelAndView = new ModelAndView();
-    System.out.println(project);
     this.projectService.update(project);
     modelAndView.addObject("projectUpdated", true);
     modelAndView.setViewName("redirect:/dashboard");
