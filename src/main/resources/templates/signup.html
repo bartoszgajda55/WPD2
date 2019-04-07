@@ -5,14 +5,10 @@
 </head>
 <body>
     <main>
-        <form class="form" th:action="@{/signup}" method="post">
-            <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
-            <h1 class="h3 mb-3 font-weight-normal">Signup Here</h1>
-            <div th:if="${param.error}">
-                Invalid email and password.
-            </div>
-            <div th:if="${param.logout}">
-                You have been logged out.
+        <form class="form" th:object="${user}" th:action="@{/signup}" method="post">
+            <h1 class="h3 mb-3 font-weight-normal">Sign Up Here</h1>
+            <div th:if="${#fields.hasErrors('email')}" class="invalid-feedback d-block py-2">
+                <h5 th:text="${#fields.errors('email').get(0)}"></h5>
             </div>
             <label for="inputEmail" class="sr-only">Email</label>
             <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />

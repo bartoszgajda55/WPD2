@@ -1,8 +1,6 @@
 package com.gcu.wpd2.controllers;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import com.gcu.wpd2.models.User;
 import com.gcu.wpd2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView viewLoginPage() {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(new User());
         modelAndView.setViewName("login");
         return modelAndView;
     }
@@ -34,21 +33,20 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView createUserFromSignupForm(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
+    public ModelAndView createUserFromSignupForm(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult.rejectValue("email", "error.user",
-              "There is already a user registered with the username provided");
+              "Email already taken!");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("signup");
             return modelAndView;
         }
         userService.saveUserAndHashPassword(user);
-        modelAndView.addObject("successMessage", "User has been registered successfully");
-        modelAndView.addObject("user", new User());
-        modelAndView.setViewName("login");
+        modelAndView.addObject("registered", true);
+        modelAndView.setViewName("redirect:/login");
         return modelAndView;
     }
     

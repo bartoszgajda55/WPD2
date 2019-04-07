@@ -9,8 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
-
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
   @Autowired
@@ -29,8 +27,8 @@ public class DatabaseSeeder implements CommandLineRunner {
     userRepository.save(bob);
     userRepository.save(alice);
 
-    Project wpd2 = new Project("WPD2", "Web Platform Development 2", Calendar.getInstance(), Calendar.getInstance());
-    Project ip3 = new Project("IP3", "Integrated Project 3", Calendar.getInstance(), Calendar.getInstance());
+    Project wpd2 = new Project("WPD2", "Web Platform Development 2", "2019-04-02", "2019-04-06");
+    Project ip3 = new Project("IP3", "Integrated Project 3", "2019-04-01", "2019-04-05");
     projectRepository.save(wpd2);
     projectRepository.save(ip3);
 
