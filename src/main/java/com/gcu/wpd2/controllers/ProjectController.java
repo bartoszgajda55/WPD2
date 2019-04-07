@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 import javax.validation.Valid;
 import java.util.Map;
 
@@ -33,19 +32,21 @@ public class ProjectController {
   }
 
   @RequestMapping(value = "/project", method = RequestMethod.POST)
-  public RedirectView createProject(@Valid Project project, BindingResult bindingResult) {
+  public ModelAndView createProject(@Valid Project project, BindingResult bindingResult) {
+    ModelAndView modelAndView = new ModelAndView();
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     User user = userService.findByEmail(auth.getName());
     Map<ObjectId, String> userProjects = projectService.getTitlesMappedById(user.getEmail());
     if (userProjects.containsValue(project.getTitle())) {
-      bindingResult.rejectValue("name", "error.name", "Project with that name already exists");
+      bindingResult.rejectValue("title", "error.title", "Project with that title already exists");
     }
     if (bindingResult.hasErrors()) {
-      System.out.println(bindingResult.getAllErrors().toString());
-      return new RedirectView("project/create");
+      modelAndView.setViewName("project/create");
+      return modelAndView;
     }
-
     projectService.saveToUser(project, user);
-    return new RedirectView("dashboard");
+    modelAndView.addObject("projectCreated", true);
+    modelAndView.setViewName("redirect:/dashboard");
+    return modelAndView;
   }
 }

@@ -15,6 +15,9 @@
         </div>
         <div class="row">
             <div class="col">
+                <div th:if="${param.projectCreated}" class="alert alert-success" role="alert">
+                    Project created successfully!
+                </div>
                 <div th:if="${userProjects != null and !userProjects.isEmpty()}">
                     <div class="card mb-3" th:each="project: ${userProjects}">
                         <div class="card-body">
