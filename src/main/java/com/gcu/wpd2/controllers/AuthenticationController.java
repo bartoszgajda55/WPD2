@@ -37,7 +37,7 @@ public class AuthenticationController {
         User userExists = userService.findByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult.rejectValue("email", "error.user",
-              "There is already a user registered with the username provided");
+              "Email already taken!");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("signup");
