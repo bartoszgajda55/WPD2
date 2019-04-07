@@ -3,30 +3,29 @@ package com.gcu.wpd2.models;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @Document
 public class Project {
   @Id
   private ObjectId _id;
-  private String name;
+  private String title;
   private String description;
-  private Calendar startDate;
-  private Calendar endDate;
+  private String startDate;
+  private String endDate;
   private List<Milestone> milestones;
 
   public Project() {
+    this("", "", "", "", new ArrayList<>());
   }
 
-  public Project(String name, String description, Calendar starDate, Calendar endDate) {
+  public Project(String name, String description, String starDate, String endDate) {
     this(name, description, starDate, endDate, new ArrayList<>());
   }
 
-  public Project(String name, String description, Calendar starDate, Calendar endDate, List<Milestone> milestones) {
-    this.name = name;
+  public Project(String title, String description, String starDate, String endDate, List<Milestone> milestones) {
+    this.title = title;
     this.description = description;
     this.startDate = starDate;
     this.endDate = endDate;
@@ -37,19 +36,19 @@ public class Project {
     return _id;
   }
 
-  public String getName() {
-    return name;
+  public String getTitle() {
+    return title;
   }
 
   public String getDescription() {
     return description;
   }
 
-  public Calendar getStartDate() {
+  public String getStartDate() {
     return startDate;
   }
 
-  public Calendar getEndDate() {
+  public String getEndDate() {
     return endDate;
   }
 
@@ -57,19 +56,19 @@ public class Project {
     return milestones;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public void setDescription(String description) {
     this.description = description;
   }
 
-  public void setStartDate(Calendar startDate) {
+  public void setStartDate(String startDate) {
     this.startDate = startDate;
   }
 
-  public void setEndDate(Calendar endDate) {
+  public void setEndDate(String endDate) {
     this.endDate = endDate;
   }
 
@@ -77,7 +76,7 @@ public class Project {
   public String toString() {
     return "Project{" +
       "_id='" + _id + '\'' +
-      ", name='" + name + '\'' +
+      ", name='" + title + '\'' +
       ", description='" + description + '\'' +
       ", startDate=" + startDate +
       ", endDate=" + endDate +

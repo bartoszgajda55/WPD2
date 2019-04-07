@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Create Project - WPD2</title>
+</head>
+<body>
+    <main class="project-create">
+        <div class="row my-4">
+            <div class="col">
+                <h2>Create a new Project</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form class="form" th:object="${project}" th:action="@{/project}" method="post">
+                    <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback d-block py-2">
+                        <h5 th:text="${#fields.errors('title').get(0)}"></h5>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectName">Name</label>
+                        <input type="text" name="title" class="form-control" id="projectName" placeholder="Enter Project name">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Description</label>
+                        <input type="text" name="description" class="form-control" id="projectDescription" placeholder="Enter Project description">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectStartDate">Start Date</label>
+                        <input type="date" name="startDate" class="form-control" id="projectStartDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectEndDate">End Date</label>
+                        <input type="date" name="endDate" class="form-control" id="projectEndDate">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Project</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

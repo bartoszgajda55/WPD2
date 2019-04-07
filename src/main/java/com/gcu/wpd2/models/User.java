@@ -4,7 +4,6 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +33,7 @@ public class User {
     }
 
     public User() {
+        this("", "", "N/A", "N/A", "N/A", new ArrayList<>());
     }
 
     public ObjectId getId() {

@@ -7,16 +7,22 @@
     <main>
         <div class="row my-4">
             <div class="col">
-                <h2>Hello <span th:text="${currentUser.getFirstName()}"></span></h2>
+                <h2>My Projects</h2>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <a class="btn btn-primary d-flex align-items-center" th:href="@{/project/create}">Add new Project</a>
             </div>
         </div>
         <div class="row">
             <div class="col">
+                <div th:if="${param.projectCreated}" class="alert alert-success" role="alert">
+                    Project created successfully!
+                </div>
                 <div th:if="${userProjects != null and !userProjects.isEmpty()}">
                     <div class="card mb-3" th:each="project: ${userProjects}">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="${project.getName()}"></h5>
-                            <h6 class="card-subtitle mb-2 text-muted" th:text="${project.getEndDate().getTime().toLocaleString()}"></h6>
+                            <h5 class="card-title" th:text="${project.getTitle()}"></h5>
+                            <h6 class="card-subtitle mb-2 text-muted" th:text="${project.getEndDate()}"></h6>
                             <p class="card-text" th:text="${project.getDescription()}"></p>
                             <a href="#" class="card-link">View More</a>
                         </div>
