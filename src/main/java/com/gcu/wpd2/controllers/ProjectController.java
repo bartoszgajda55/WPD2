@@ -6,6 +6,8 @@ import com.gcu.wpd2.services.ProjectService;
 import com.gcu.wpd2.services.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,8 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -86,5 +90,11 @@ public class ProjectController {
     modelAndView.addObject("projectDeleted", true);
     modelAndView.setViewName("redirect:/dashboard");
     return modelAndView;
+  }
+
+  @ResponseBody
+  @RequestMapping(value = "api/project", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Project> getProjects() {
+    return projectService.getAll();
   }
 }
