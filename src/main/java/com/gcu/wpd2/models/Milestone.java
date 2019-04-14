@@ -1,12 +1,15 @@
 package com.gcu.wpd2.models;
 
+
+
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Milestone {
   @Id
-  private String id;
+  private ObjectId _id;
   private String name;
   private String content;
   private String deadline;
@@ -22,8 +25,11 @@ public class Milestone {
     this.deadline = deadline;
   }
 
-  public String getId() {
-    return id;
+  public Milestone() {
+  }
+
+  public ObjectId getId() {
+    return _id;
   }
 
   public String getName() {
@@ -61,10 +67,11 @@ public class Milestone {
   @Override
   public String toString() {
     return "Milestone{" +
-      "id='" + id + '\'' +
-      ", name='" + name + '\'' +
-      ", content='" + content + '\'' +
-      ", deadline=" + deadline +
-      '}';
+            "_id=" + _id +
+            ", name='" + name + '\'' +
+            ", content='" + content + '\'' +
+            ", deadline='" + deadline + '\'' +
+            ", isCompleted=" + isCompleted +
+            '}';
   }
 }
