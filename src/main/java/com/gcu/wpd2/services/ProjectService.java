@@ -34,6 +34,10 @@ public class ProjectService {
     this.projectRepository.save(project);
   }
 
+  public void remove(Project project) {this.projectRepository.delete(project);}
+
+
+
   public void saveToUser(Project project, User user) {
     this.projectRepository.save(project);
     user.getProjects().add(project.getId());
