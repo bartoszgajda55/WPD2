@@ -30,6 +30,7 @@ public class Milestone {
     this.name = name;
     this.content = content;
     this.deadline = deadline;
+    this.isCompleted = false;
   }
 
   public Milestone() {

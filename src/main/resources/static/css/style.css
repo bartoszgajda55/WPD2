@@ -46,7 +46,7 @@ body {
 }
 
 .onoffswitch {
-  position: relative; width: 50px;
+  position: relative; width: 90px;
   -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 .onoffswitch-checkbox {
@@ -89,4 +89,7 @@ body {
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
   right: 0px;
+}
+.milestone-input{
+  margin: 15px;
 }
