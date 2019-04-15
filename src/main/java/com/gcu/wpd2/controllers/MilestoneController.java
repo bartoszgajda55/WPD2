@@ -22,6 +22,7 @@ public class MilestoneController {
     @RequestMapping(value = "/milestone/view/{milestoneId}", method = RequestMethod.GET)
     public ModelAndView getProjectDetailsPage(@PathVariable ObjectId milestoneId) {
         ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.addObject("milestone",milestoneService.getByID(milestoneId));
         modelAndView.setViewName("project/view");
         return  modelAndView;

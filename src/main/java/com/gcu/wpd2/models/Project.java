@@ -53,7 +53,7 @@ public class Project {
   }
 
   public List<Milestone> getMilestones() {
-    this.milestones.toString();
+
     return milestones;
   }
   public void addMilestones(Milestone milestone){

@@ -41,10 +41,21 @@
 
             <h3>Milestones</h3>
 
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label th:text="${project.getMilestones()}" class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+            <div th:if="${project.milestones != null and !project.milestones.isEmpty()}">
+                <div class="card mb-3" th:each="milestone: ${project.milestones}">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${milestone.getName()}"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" th:text="${milestone.getContent()}"></h6>
+                        <p class="card-text" th:text="${milestone.getDeadline()}"></p>
+
+                    </div>
+                </div>
             </div>
+
+            <!--<div class="custom-control custom-checkbox">-->
+                <!--<input type="checkbox" class="custom-control-input" id="customCheck1">-->
+                <!--<label th:text="${project.getMilestones()}" class="custom-control-label" for="customCheck1">Check this custom checkbox</label>-->
+            <!--</div>-->
 
 
         </div>
