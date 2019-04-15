@@ -15,6 +15,13 @@ public class Milestone {
   private String deadline;
   private boolean isCompleted;
 
+  public Milestone(String name, String content, String deadline, boolean isCompleted) {
+    this.name = name;
+    this.content = content;
+    this.deadline = deadline;
+    this.isCompleted = isCompleted;
+  }
+
   public Milestone(String name, String content) {
     this(name, content, null);
   }

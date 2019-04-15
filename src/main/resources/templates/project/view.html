@@ -49,11 +49,11 @@
                 <div class="card mb-3" th:each="milestone: ${project.milestones}">
                     <div class="card-body">
 
-                        <h5 class="card-title" th:text="${milestone.getName()}"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted" th:text="${milestone.getContent()}"></h6>
+                        <h7 class="card-title" th:text="${milestone.getName()}"></h7>
+                        <h8 class="card-subtitle mb-2 text-muted" th:text="${milestone.getContent()}"></h8>
                         <p class="card-text" th:text="${milestone.getDeadline()}"></p>
                         <div class="onoffswitch">
-                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" th:checked="${milestone.isCompleted()==true}">
                             <label class="onoffswitch-label" for="myonoffswitch">
                                 <span class="onoffswitch-inner"></span>
                                 <span class="onoffswitch-switch"></span>

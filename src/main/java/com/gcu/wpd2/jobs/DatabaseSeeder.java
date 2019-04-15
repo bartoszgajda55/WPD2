@@ -33,12 +33,18 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     Project wpd2 = new Project("WPD2", "Web Platform Development 2", "2019-04-02", "2019-04-06");
     Project ip3 = new Project("IP3", "Integrated Project 3", "2019-04-01", "2019-04-05");
+
     Milestone mi1 = new Milestone("Design UX", "Implement UX into existing projext");
     Milestone mi2 = new Milestone("PWA", "Implement Progressive Web Application", "04/02/2020");
+    Milestone mi3 = new Milestone("Responsive Design", "Implement Responsive design for the application", "14/08/2019", true);
+
     milestoneRepository.save(mi1);
-    wpd2.addMilestones(mi1);
     milestoneRepository.save(mi2);
+    milestoneRepository.save(mi3);
+
+    wpd2.addMilestones(mi1);
     wpd2.addMilestones(mi2);
+    wpd2.addMilestones(mi3);
 
     projectRepository.save(wpd2);
     projectRepository.save(ip3);
