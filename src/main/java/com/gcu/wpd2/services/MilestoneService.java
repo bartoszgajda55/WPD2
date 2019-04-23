@@ -26,6 +26,12 @@ public class MilestoneService {
 
     public Milestone getByName(String name){ return this.milestoneRepository.findByName(name);}
 
+    public void saveToProject(Milestone milestone, Project project){
+        this.milestoneRepository.save(milestone);
+        project.getMilestones().add(milestone);
+        projectService.save(project);
+    }
+
 
 
 
