@@ -36,6 +36,13 @@ public class MilestoneController {
         modelAndView.setViewName("project/view");
         return  modelAndView;
     }
+    @RequestMapping(value = "/milestone/create", method = RequestMethod.GET)
+    public ModelAndView getCreateMilestonePage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(new Milestone());
+        modelAndView.setViewName("milestone/create");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/milestone/add", method = RequestMethod.POST)
     public ModelAndView createMilestone(@Valid Milestone milestone, BindingResult bindingResult){
