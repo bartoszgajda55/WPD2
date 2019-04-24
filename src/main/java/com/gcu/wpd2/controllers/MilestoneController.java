@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,11 +44,12 @@ public class MilestoneController {
     }
 
     @RequestMapping(value = "/milestone/add", method = RequestMethod.POST)
-    public ModelAndView createMilestone(@Valid Milestone milestone, BindingResult bindingResult){
+    public ModelAndView createMilestone(@Valid Milestone milestone){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Project project = projectService.getByName(auth.getName());
         milestoneService.saveToProject(milestone, project);
+        modelAndView.setViewName("redirect:/project/view");
         return modelAndView;
     }
 
