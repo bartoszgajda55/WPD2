@@ -48,6 +48,15 @@ public class ProjectService {
     return projects;
   }
 
+  public List<Project> getSharedWithByUserId(ObjectId id) {
+    List<Project> sharedWith = new ArrayList<>();
+    this.projectRepository.findAll().forEach(project -> {
+      if(project.getSharedWith().contains(id))
+        sharedWith.add(project);
+    });
+    return sharedWith;
+  }
+
   public Map<ObjectId, String> getTitlesMappedById(String email) {
     Map<ObjectId, String> projectsNameId = new HashMap<>();
     this.userService.getUserProjectIdsByEmail(email).forEach(objectId -> {
