@@ -91,6 +91,10 @@ public class Project {
     this.sharedWith = sharedWith;
   }
 
+  public void addUserToSharedWith(User user) {
+    this.sharedWith.add(user.getId());
+  }
+
   @Override
   public String toString() {
     return "Project{" +
