@@ -24,6 +24,9 @@
                 <div th:if="${param.projectDeleted}" class="alert alert-success" role="alert">
                     Project deleted successfully!
                 </div>
+                <div th:if="${param.projectShared}" class="alert alert-success" role="alert">
+                    Project shared successfully!
+                </div>
                 <div th:if="${userProjects != null and !userProjects.isEmpty()}">
                     <div class="card mb-3" th:each="project: ${userProjects}">
                         <div class="card-body">
