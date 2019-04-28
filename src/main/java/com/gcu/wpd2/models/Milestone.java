@@ -10,24 +10,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Milestone {
   @Id
   private ObjectId _id;
-  private String name;
+  private String title;
   private String content;
   private String deadline;
   private boolean isCompleted;
 
-  public Milestone(String name, String content, String deadline, boolean isCompleted) {
-    this.name = name;
+  public Milestone(String title, String content, String deadline, boolean isCompleted) {
+    this.title = title;
     this.content = content;
     this.deadline = deadline;
     this.isCompleted = isCompleted;
   }
 
-  public Milestone(String name, String content) {
-    this(name, content, null);
+  public Milestone(String title, String content) {
+    this(title, content, null);
   }
 
-  public Milestone(String name, String content, String deadline) {
-    this.name = name;
+  public Milestone(String title, String content, String deadline) {
+    this.title = title;
     this.content = content;
     this.deadline = deadline;
     this.isCompleted = false;
@@ -40,8 +40,8 @@ public class Milestone {
     return _id;
   }
 
-  public String getName() {
-    return name;
+  public String getTitle() {
+    return title;
   }
 
   public String getContent() {
@@ -56,8 +56,8 @@ public class Milestone {
     return isCompleted;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public void setContent(String content) {
@@ -76,7 +76,7 @@ public class Milestone {
   public String toString() {
     return "Milestone{" +
             "_id=" + _id +
-            ", name='" + name + '\'' +
+            ", name='" + title + '\'' +
             ", content='" + content + '\'' +
             ", deadline='" + deadline + '\'' +
             ", isCompleted=" + isCompleted +

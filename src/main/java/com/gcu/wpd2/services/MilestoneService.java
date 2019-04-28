@@ -24,7 +24,13 @@ public class MilestoneService {
 
     public Milestone getByID(ObjectId id) {return this.milestoneRepository.findById(id);}
 
-    public Milestone getByName(String name){ return this.milestoneRepository.findByName(name);}
+    public Milestone getByName(String title){ return this.milestoneRepository.findByTitle(title);}
+
+    public void saveToProject(Milestone milestone, Project project){
+        this.milestoneRepository.save(milestone);
+        project.addMilestones(milestone);
+        projectService.save(project);
+    }
 
 
 

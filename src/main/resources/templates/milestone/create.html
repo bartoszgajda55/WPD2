@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Create Milestone - WPD2</title>
+</head>
+<body>
+<main class="project-create">
+    <div class="row my-4">
+        <div class="col">
+            <h2>Create a new Milestone</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <form class="form" th:object="${milestone}" th:action="@{/project/view/{projectId}/milestone(projectId = ${projectId})}" method="post">
+
+                <div class="form-group">
+                    <label for="milestoneName">Title: </label>
+                    <input type="text" name="title" class="form-control" id="milestoneName" placeholder="Enter Milestone title">
+                </div>
+                <div class="form-group">
+                    <label for="milestoneDescription">Description:</label>
+                    <input type="text" name="content" class="form-control" id="milestoneDescription" placeholder="Enter Milestone description">
+                </div>
+                <div class="form-group">
+                    <label for="milestoneDeadline">Deadline</label>
+                    <input type="date" name="deadline" class="form-control" id="milestoneDeadline">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Milestone</button>
+            </form>
+        </div>
+    </div>
+
+
+</main>
+</body>
+</html>
