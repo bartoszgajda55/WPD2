@@ -38,7 +38,6 @@ public class MilestoneService {
     public void deleteMilestoneFromProject(Milestone milestone, ObjectId projectId){
         Project project = projectRepository.findBy_id(projectId);
         project.getMilestones().remove(milestone);
-        System.out.println(project.getMilestones().contains(milestone));
         projectRepository.save(project);
     }
 
@@ -48,10 +47,10 @@ public class MilestoneService {
 
     public void updateProjectMilestoneStatus(ObjectId projectId, ObjectId milestoneId){
         Project project = projectRepository.findBy_id(projectId);
-        project.getMilestones().forEach(milestone -> {
-            if(milestone.getId() == milestoneId)
-                milestone.setIsCompleted(!milestone.getIsCompleted());
-        });
+        Milestone milestone = milestoneRepository.findBy_id(milestoneId);
+        milestone.setIsCompleted(!milestone.getIsCompleted());
+        project.getMilestones().get(project.getMilestones().indexOf(milestone)).setIsCompleted(milestone.getIsCompleted());
+        milestoneRepository.save(milestone);
         projectRepository.save(project);
     }
 }
