@@ -49,6 +49,7 @@ public class MilestoneController {
         ModelAndView modelAndView = new ModelAndView();
         Project project = projectService.getById(projectId);
         milestoneService.saveToProject(milestone, project);
+        modelAndView.addObject("milestoneCreated", true);
         modelAndView.setViewName("redirect:/project/view/" + projectId);
         return modelAndView;
     }
