@@ -68,6 +68,10 @@ public class Project {
     return sharedWith;
   }
 
+  public List<ObjectId> getSharedWith() {
+    return sharedWith;
+  }
+
   public void setId(ObjectId id) {
     this.id = id;
   }
