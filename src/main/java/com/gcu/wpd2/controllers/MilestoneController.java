@@ -31,7 +31,6 @@ public class MilestoneController {
     @RequestMapping(value = "/milestone/view/{milestoneId}", method = RequestMethod.GET)
     public ModelAndView getProjectDetailsPage(@PathVariable ObjectId milestoneId) {
         ModelAndView modelAndView = new ModelAndView();
-
         modelAndView.addObject("milestone",milestoneService.getByID(milestoneId));
         modelAndView.setViewName("project/view");
         return  modelAndView;
@@ -49,7 +48,6 @@ public class MilestoneController {
     public ModelAndView createMilestone(@Valid Milestone milestone, @PathVariable ObjectId projectId){
         ModelAndView modelAndView = new ModelAndView();
         Project project = projectService.getById(projectId);
-        System.out.println(milestone);
         milestoneService.saveToProject(milestone, project);
         modelAndView.setViewName("redirect:/project/view/" + projectId);
         return modelAndView;
