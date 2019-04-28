@@ -52,9 +52,7 @@ public class Milestone {
     return deadline;
   }
 
-  public boolean isCompleted() {
-    return isCompleted;
-  }
+  public boolean getIsCompleted() {return isCompleted;}
 
   public void setTitle(String title) {
     this.title = title;
@@ -68,7 +66,7 @@ public class Milestone {
     this.deadline = deadline;
   }
 
-  public void setCompleted(boolean completed) {
+  public void setIsCompleted(boolean completed) {
     isCompleted = completed;
   }
 
@@ -81,5 +79,20 @@ public class Milestone {
             ", deadline='" + deadline + '\'' +
             ", isCompleted=" + isCompleted +
             '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Milestone)) return false;
+
+    Milestone milestone = (Milestone) o;
+
+    return _id != null ? _id.equals(milestone._id) : milestone._id == null;
+  }
+
+  @Override
+  public int hashCode() {
+    return _id != null ? _id.hashCode() : 0;
   }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -52,6 +53,33 @@ public class MilestoneController {
         milestoneService.saveToProject(milestone, project);
         modelAndView.setViewName("redirect:/project/view/" + projectId);
         return modelAndView;
+    }
+    @RequestMapping(value = "/project/view/{projectId}/milestone/delete/{milestoneId}", method = RequestMethod.GET)
+    public ModelAndView getDeleteMilestonePage(@PathVariable ObjectId projectId, @PathVariable ObjectId milestoneId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("milestoneIdentifier", milestoneId);
+        modelAndView.addObject("projectIdentifier", projectId);
+        modelAndView.addObject("milestoneTitle", milestoneService.getByID(milestoneId).getTitle());
+        modelAndView.setViewName("milestone/delete");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/project/view/{projectId}/milestone/delete/{milestoneId}", method = RequestMethod.DELETE)
+    public ModelAndView deleteMilestone(@PathVariable ObjectId projectId, @PathVariable ObjectId milestoneId){
+        ModelAndView modelAndView = new ModelAndView();
+        Milestone milestone = milestoneService.getByID(milestoneId);
+        milestoneService.deleteMilestoneFromProject(milestone, projectId);
+        milestoneService.delete(milestone);
+        modelAndView.addObject("milestoneDeleted", true);
+        modelAndView.setViewName("redirect:/project/view/" + projectId);
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/project/view/{projectId}/milestone/edit/{milestoneId}", method = RequestMethod.GET)
+    public boolean updateMilestoneStatus(@PathVariable ObjectId projectId, @PathVariable ObjectId milestoneId){
+        milestoneService.updateProjectMilestoneStatus(projectId, milestoneId);
+        return true;
     }
 
 }

@@ -50,12 +50,13 @@
                         <h6 class="card-subtitle mb-2 text-muted" th:text="${milestone.getContent()}"></h6>
                         <p class="card-text" th:text="${milestone.getDeadline()}"></p>
                         <div class="onoffswitch">
-                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" th:id="${milestone.getId()}" th:checked="${milestone.isCompleted()}">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" th:data="${project.getId()}" th:id="${milestone.getId()}" th:checked="${milestone.getIsCompleted()}">
                             <label class="onoffswitch-label" th:for="${milestone.getId()}">
                                 <span class="onoffswitch-inner"></span>
                                 <span class="onoffswitch-switch"></span>
                             </label>
                         </div>
+                        <a class="btn btn-danger" th:href="@{/project/view/{projectId}/milestone/delete/{milestoneId}(projectId = ${project.getId()}, milestoneId = ${milestone.getId()})}">Delete</a>
                     </div>
                 </div>
             </div>
