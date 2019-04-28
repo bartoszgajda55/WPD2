@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Update Project - WPD2</title>
+</head>
+<body>
+    <main class="project-page project-edit">
+        <div class="row my-4">
+            <div class="col">
+                <h2>Update Project</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form class="form" th:object="${project}" th:action="@{/project}" th:method="put">
+                    <input type="hidden" th:value="${project.getId()}" name="id" id="projectId">
+                    <div class="form-group">
+                        <label for="projectTitle">Title</label>
+                        <input type="text" th:value="${project.getTitle()}" name="title" class="form-control" id="projectTitle" placeholder="Enter Project title">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Description</label>
+                        <input type="text" th:value="${project.getDescription()}" name="description" class="form-control" id="projectDescription" placeholder="Enter Project description">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectStartDate">Start Date</label>
+                        <input type="date" th:value="${project.getStartDate()}" name="startDate" class="form-control" id="projectStartDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectEndDate">End Date</label>
+                        <input type="date" th:value="${project.getEndDate()}" name="endDate" class="form-control" id="projectEndDate">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Project</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
