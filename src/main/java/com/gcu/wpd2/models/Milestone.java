@@ -52,9 +52,7 @@ public class Milestone {
     return deadline;
   }
 
-  public boolean isCompleted() {
-    return isCompleted;
-  }
+  public boolean getIsCompleted() {return isCompleted;}
 
   public void setTitle(String title) {
     this.title = title;
@@ -68,7 +66,7 @@ public class Milestone {
     this.deadline = deadline;
   }
 
-  public void setCompleted(boolean completed) {
+  public void setIsCompleted(boolean completed) {
     isCompleted = completed;
   }
 
