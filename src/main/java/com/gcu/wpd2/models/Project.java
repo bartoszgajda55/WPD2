@@ -54,7 +54,12 @@ public class Project {
   }
 
   public List<Milestone> getMilestones() {
+
     return milestones;
+  }
+  public void addMilestones(Milestone milestone){
+      this.milestones.add(milestone);
+
   }
 
   public void setId(ObjectId id) {
