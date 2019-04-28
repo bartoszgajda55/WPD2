@@ -40,11 +40,8 @@
                     <td th:text="${project.getEndDate()}"></td>
                 </tbody>
             </table>
-
-            <h3>Milestones</h3>
-
-            <a class="btn btn-primary mb-3" th:href="@{/project/view/{projectId}/milestone/create(projectId = ${project.getId()})}">Add new Milestone</a>
-
+    <h3>Milestones</h3>
+             <a class="btn btn-primary mb-3" th:href="@{/project/view/{projectId}/milestone/create(projectId = ${project.getId()})}">Add new Milestone</a>
             <div th:if="${project.milestones != null and !project.milestones.isEmpty()}">
                 <div class="card mb-3" th:each="milestone: ${project.milestones}">
                     <div class="card-body">
