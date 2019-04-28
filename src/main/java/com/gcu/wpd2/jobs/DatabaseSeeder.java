@@ -31,7 +31,6 @@ public class DatabaseSeeder implements CommandLineRunner {
     userRepository.save(bob);
     userRepository.save(alice);
 
-
     Project wpd2 = new Project("WPD2", "Web Platform Development 2", "2019-04-02", "2019-04-06");
     Project ip3 = new Project("IP3", "Integrated Project 3", "2019-04-01", "2019-04-05");
 
