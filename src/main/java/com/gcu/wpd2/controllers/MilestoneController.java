@@ -76,7 +76,7 @@ public class MilestoneController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/project/view/{projectId}/milestone/edit/{milestoneId", method = RequestMethod.GET)
+    @RequestMapping(value = "/project/view/{projectId}/milestone/edit/{milestoneId}", method = RequestMethod.GET)
     public boolean updateMilestoneStatus(@PathVariable ObjectId projectId, @PathVariable ObjectId milestoneId){
         milestoneService.updateProjectMilestoneStatus(projectId, milestoneId);
         return true;
