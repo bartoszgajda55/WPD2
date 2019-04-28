@@ -45,4 +45,13 @@ public class MilestoneService {
     public void delete(Milestone milestone){
         this.milestoneRepository.delete(milestone);
     }
+
+    public void updateProjectMilestoneStatus(ObjectId projectId, ObjectId milestoneId){
+        Project project = projectRepository.findBy_id(projectId);
+        project.getMilestones().forEach(milestone -> {
+            if(milestone.getId() == milestoneId)
+                milestone.setIsCompleted(!milestone.getIsCompleted());
+        });
+        projectRepository.save(project);
+    }
 }
