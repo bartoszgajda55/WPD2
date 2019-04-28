@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -95,6 +94,22 @@ public class ProjectController {
     this.projectService.delete(project);
     modelAndView.addObject("projectDeleted", true);
     modelAndView.setViewName("redirect:/dashboard");
+    return modelAndView;
+  }
+
+  @RequestMapping(value = "/project/share/{projectId}", method = RequestMethod.GET)
+  public ModelAndView getShareProjectTemplate(@PathVariable ObjectId projectId) {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("project", projectService.getById(projectId));
+    modelAndView.addObject("users", userService.getAll());
+    modelAndView.setViewName("project/share");
+    return modelAndView;
+  }
+
+  @RequestMapping(value = "/project/share/{projectId}", method = RequestMethod.POST)
+  public ModelAndView addUserToProjectSharedList(@PathVariable ObjectId projectId) {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("redirect:/project/view/" + projectId);
     return modelAndView;
   }
 }
