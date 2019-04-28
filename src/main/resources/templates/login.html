@@ -7,8 +7,8 @@
     <main>
         <form class="form" th:object="${user}" th:action="@{/login}" method="post">
             <h1 class="h3 mb-3 font-weight-normal">Log In</h1>
-            <div th:if="${param.error}" class="invalid-feedback d-block py-2">
-                <h5>Email or password invalid!</h5>
+            <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                Email or password invalid!
             </div>
             <div th:if="${param.registered}" class="alert alert-success" role="alert">
                 Account created! You can now Log in.

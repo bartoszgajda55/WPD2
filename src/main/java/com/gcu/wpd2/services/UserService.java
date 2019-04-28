@@ -1,6 +1,7 @@
 package com.gcu.wpd2.services;
 
 import com.gcu.wpd2.db.UserRepository;
+import com.gcu.wpd2.models.Project;
 import com.gcu.wpd2.models.User;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,11 @@ public class UserService {
 
   public List<ObjectId> getUserProjectIdsByEmail(String email) {
     return userRepository.findByEmail(email).getProjects();
+  }
+
+  public void deleteUserProjectByEmail(String email, ObjectId projectId) {
+    User user = this.userRepository.findByEmail(email);
+    user.getProjects().remove(projectId);
+    userRepository.save(user);
   }
 }

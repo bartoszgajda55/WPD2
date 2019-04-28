@@ -10,13 +10,19 @@
                 <h2>My Projects</h2>
             </div>
             <div class="col d-flex justify-content-end">
-                <a class="btn btn-primary d-flex align-items-center" th:href="@{/project/create}">Add new Project</a>
+                <a class="btn btn-success d-flex align-items-center" th:href="@{/project/create}">Add new Project</a>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <div th:if="${param.projectCreated}" class="alert alert-success" role="alert">
                     Project created successfully!
+                </div>
+                <div th:if="${param.projectUpdated}" class="alert alert-success" role="alert">
+                    Project updated successfully!
+                </div>
+                <div th:if="${param.projectDeleted}" class="alert alert-success" role="alert">
+                    Project deleted successfully!
                 </div>
                 <div th:if="${userProjects != null and !userProjects.isEmpty()}">
                     <div class="card mb-3" th:each="project: ${userProjects}">
@@ -25,6 +31,10 @@
                             <h6 class="card-subtitle mb-2 text-muted" th:text="${project.getEndDate()}"></h6>
                             <p class="card-text" th:text="${project.getDescription()}"></p>
                             <a th:href="@{/project/view/{projectId}(projectId = ${project.getId()})}" class="btn btn-primary">View</a>
+                            <a href="#" class="btn btn-primary">View</a>
+                            <a th:href="@{/project/edit/{projectId}(projectId = ${project.getId()})}" class="btn btn-warning">Edit</a>
+                            <a th:href="@{/project/delete/{projectId}(projectId = ${project.getId()})}" class="btn btn-danger">Delete</a>
+
                         </div>
                     </div>
                 </div>
