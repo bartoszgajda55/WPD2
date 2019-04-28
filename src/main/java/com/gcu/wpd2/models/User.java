@@ -11,7 +11,7 @@ import java.util.List;
 @Document(collection = "user")
 public class User {
     @Id
-    private ObjectId _id;
+    private ObjectId id;
     @Indexed(unique = true)
     private String email;
     private String password;
@@ -21,10 +21,15 @@ public class User {
     private List<ObjectId> projects;
 
     public User(String email, String password, String firstName, String lastName, String bio) {
-        this(email, password, firstName, lastName, bio, new ArrayList<>());
+        this(null, email, password, firstName, lastName, bio, new ArrayList<>());
     }
 
-    public User(String email, String password, String firstName, String lastName, String bio, List<ObjectId> projects) {
+    public User() {
+        this(null, "", "", "N/A", "N/A", "N/A", new ArrayList<>());
+    }
+
+    public User(ObjectId id, String email, String password, String firstName, String lastName, String bio, List<ObjectId> projects) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -33,12 +38,8 @@ public class User {
         this.projects = projects;
     }
 
-    public User() {
-        this("", "", "N/A", "N/A", "N/A", new ArrayList<>());
-    }
-
     public ObjectId getId() {
-        return _id;
+        return id;
     }
 
     public String getEmail() {
@@ -63,6 +64,10 @@ public class User {
 
     public List<ObjectId> getProjects() {
         return projects;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public void setEmail(String email) {
@@ -92,7 +97,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-          "id='" + _id + '\'' +
+          "id='" + id + '\'' +
           ", email='" + email + '\'' +
           ", firstName='" + firstName + '\'' +
           ", lastName='" + lastName + '\'' +

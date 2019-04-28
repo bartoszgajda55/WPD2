@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ProjectRepository extends MongoRepository<Project, String> {
   List<Project> findAll();
-  Project findBy_id(ObjectId id);
+  Project findById(ObjectId id);
   Project findByTitle(String name);
 }
