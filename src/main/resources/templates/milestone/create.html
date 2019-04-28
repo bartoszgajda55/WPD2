@@ -13,15 +13,15 @@
 
     <div class="row">
         <div class="col">
-            <form class="form" th:object="${milestone}" th:action="@{/milestone/add}" method="post">
+            <form class="form" th:object="${milestone}" th:action="@{/project/view/{projectId}/milestone(projectId = ${projectId})}" method="post">
 
                 <div class="form-group">
-                    <label for="milestoneName">Title</label>
+                    <label for="milestoneName">Title: </label>
                     <input type="text" name="title" class="form-control" id="milestoneName" placeholder="Enter Milestone title">
                 </div>
                 <div class="form-group">
-                    <label for="milestoneDescription">Description</label>
-                    <input type="text" name="description" class="form-control" id="milestoneDescription" placeholder="Enter Milestone description">
+                    <label for="milestoneDescription">Description:</label>
+                    <input type="text" name="content" class="form-control" id="milestoneDescription" placeholder="Enter Milestone description">
                 </div>
                 <div class="form-group">
                     <label for="milestoneDeadline">Deadline</label>

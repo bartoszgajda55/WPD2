@@ -35,21 +35,22 @@ public class MilestoneController {
         modelAndView.setViewName("project/view");
         return  modelAndView;
     }
-    @RequestMapping(value = "/milestone/create", method = RequestMethod.GET)
-    public ModelAndView getCreateMilestonePage(){
+    @RequestMapping(value = "/project/view/{projectId}/milestone/create", method = RequestMethod.GET)
+    public ModelAndView getCreateMilestonePage(@PathVariable ObjectId projectId){
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("projectId", projectId);
         modelAndView.addObject(new Milestone());
         modelAndView.setViewName("milestone/create");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/milestone/add", method = RequestMethod.POST)
-    public ModelAndView createMilestone(@Valid Milestone milestone){
+    @RequestMapping(value = "/project/view/{projectId}/milestone", method = RequestMethod.POST)
+    public ModelAndView createMilestone(@Valid Milestone milestone, @PathVariable ObjectId projectId){
         ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Project project = projectService.getByName(auth.getName());
+        Project project = projectService.getById(projectId);
+        System.out.println(milestone);
         milestoneService.saveToProject(milestone, project);
-        modelAndView.setViewName("redirect:/project/view");
+        modelAndView.setViewName("redirect:/project/view/" + projectId);
         return modelAndView;
     }
 
