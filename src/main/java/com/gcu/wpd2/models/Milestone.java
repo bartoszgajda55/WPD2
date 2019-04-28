@@ -82,4 +82,19 @@ public class Milestone {
             ", isCompleted=" + isCompleted +
             '}';
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Milestone)) return false;
+
+    Milestone milestone = (Milestone) o;
+
+    return _id != null ? _id.equals(milestone._id) : milestone._id == null;
+  }
+
+  @Override
+  public int hashCode() {
+    return _id != null ? _id.hashCode() : 0;
+  }
 }

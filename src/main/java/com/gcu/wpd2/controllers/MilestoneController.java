@@ -66,6 +66,9 @@ public class MilestoneController {
     @RequestMapping(value = "/project/view/{projectId}/milestone/delete/{milestoneId}", method = RequestMethod.DELETE)
     public ModelAndView deleteMilestone(@PathVariable ObjectId projectId, @PathVariable ObjectId milestoneId){
         ModelAndView modelAndView = new ModelAndView();
+        Milestone milestone = milestoneService.getByID(milestoneId);
+        milestoneService.deleteMilestoneFromProject(milestone, projectId);
+        milestoneService.delete(milestone);
         modelAndView.addObject("milestoneDeleted", true);
         modelAndView.setViewName("redirect:/project/view/" + projectId);
         return modelAndView;

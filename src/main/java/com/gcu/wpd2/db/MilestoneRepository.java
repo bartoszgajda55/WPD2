@@ -5,7 +5,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface MilestoneRepository extends MongoRepository<Milestone, String> {
-  public Milestone findByTitle(String title);
+   Milestone findByTitle(String title);
 
   Milestone findBy_id(ObjectId id);
+
 }
