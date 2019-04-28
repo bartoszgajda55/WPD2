@@ -53,5 +53,22 @@ public class MilestoneController {
         modelAndView.setViewName("redirect:/project/view/" + projectId);
         return modelAndView;
     }
+    @RequestMapping(value = "/project/view/{projectId}/milestone/delete/{milestoneId}", method = RequestMethod.GET)
+    public ModelAndView getDeleteMilestonePage(@PathVariable ObjectId projectId, @PathVariable ObjectId milestoneId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("milestoneIdentifier", milestoneId);
+        modelAndView.addObject("projectIdentifier", projectId);
+        modelAndView.addObject("milestoneTitle", milestoneService.getByID(milestoneId).getTitle());
+        modelAndView.setViewName("milestone/delete");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/project/view/{projectId}/milestone/delete/{milestoneId}", method = RequestMethod.DELETE)
+    public ModelAndView deleteMilestone(@PathVariable ObjectId projectId, @PathVariable ObjectId milestoneId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("milestoneDeleted", true);
+        modelAndView.setViewName("redirect:/project/view/" + projectId);
+        return modelAndView;
+    }
 
 }

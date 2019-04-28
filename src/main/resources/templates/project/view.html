@@ -59,6 +59,7 @@
                                 <span class="onoffswitch-switch"></span>
                             </label>
                         </div>
+                        <a class="btn btn-danger" th:href="@{/project/view/{projectId}/milestone/delete/{milestoneId}(projectId = ${project.getId()}, milestoneId = ${milestone.getId()})}">Delete</a>
                     </div>
                 </div>
             </div>

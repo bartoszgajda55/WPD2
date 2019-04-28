@@ -22,7 +22,7 @@ public class MilestoneService {
 
     public List<Milestone> getAll() {return milestoneRepository.findAll();}
 
-    public Milestone getByID(ObjectId id) {return this.milestoneRepository.findById(id);}
+    public Milestone getByID(ObjectId id) {return this.milestoneRepository.findBy_id(id);}
 
     public Milestone getByName(String title){ return this.milestoneRepository.findByTitle(title);}
 
