@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -72,6 +73,13 @@ public class MilestoneController {
         modelAndView.addObject("milestoneDeleted", true);
         modelAndView.setViewName("redirect:/project/view/" + projectId);
         return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/project/view/{projectId}/milestone/edit/{milestoneId", method = RequestMethod.GET)
+    public boolean updateMilestoneStatus(@PathVariable ObjectId projectId, @PathVariable ObjectId milestoneId){
+        milestoneService.updateProjectMilestoneStatus(projectId, milestoneId);
+        return true;
     }
 
 }
