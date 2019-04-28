@@ -26,7 +26,7 @@ public class MilestoneService {
 
     public List<Milestone> getAll() {return milestoneRepository.findAll();}
 
-    public Milestone getByID(ObjectId id) {return this.milestoneRepository.findBy_id(id);}
+    public Milestone getByID(ObjectId id) {return this.milestoneRepository.findById(id);}
 
     public Milestone getByName(String title){ return this.milestoneRepository.findByTitle(title);}
 
@@ -36,7 +36,7 @@ public class MilestoneService {
         projectService.save(project);
     }
     public void deleteMilestoneFromProject(Milestone milestone, ObjectId projectId){
-        Project project = projectRepository.findBy_id(projectId);
+        Project project = projectRepository.findById(projectId);
         project.getMilestones().remove(milestone);
         projectRepository.save(project);
     }
@@ -46,8 +46,8 @@ public class MilestoneService {
     }
 
     public void updateProjectMilestoneStatus(ObjectId projectId, ObjectId milestoneId){
-        Project project = projectRepository.findBy_id(projectId);
-        Milestone milestone = milestoneRepository.findBy_id(milestoneId);
+        Project project = projectRepository.findById(projectId);
+        Milestone milestone = milestoneRepository.findById(milestoneId);
         milestone.setIsCompleted(!milestone.getIsCompleted());
         project.getMilestones().get(project.getMilestones().indexOf(milestone)).setIsCompleted(milestone.getIsCompleted());
         milestoneRepository.save(milestone);
