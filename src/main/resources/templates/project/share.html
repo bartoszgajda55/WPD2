@@ -15,7 +15,7 @@
             <form class="form" th:object="${project}" th:action="@{/project/share/{projectId}(projectId = ${project.getId()})}" th:method="post">
                 <input type="hidden" th:value="${project.getId()}" name="id" id="projectId">
                 <label for="usersSelect">Select the User to share Project to</label>
-                <select class="form-control" name="users" id="usersSelect">
+                <select class="form-control" name="usersSelect" id="usersSelect">
                     <option th:each="user: ${users}" th:value="${user.getId()}" th:text="${user.getEmail()}"></option>
                 </select>
                 <button type="submit" class="btn btn-primary">Share Project</button>

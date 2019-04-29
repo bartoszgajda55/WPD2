@@ -41,6 +41,14 @@ public class ProjectService {
     return user.getProjects().contains(project.getId());
   }
 
+  public void addUserToSharedWith(ObjectId userId, ObjectId projectId) {
+    Project project = projectRepository.findById(projectId);
+    if(!project.getSharedWith().contains(userId)) {
+      project.getSharedWith().add(userId);
+    }
+    projectRepository.save(project);
+  }
+
   public void saveToUser(Project project, User user) {
     this.projectRepository.save(project);
     user.getProjects().add(project.getId());

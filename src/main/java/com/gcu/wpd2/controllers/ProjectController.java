@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.Map;
@@ -109,8 +110,10 @@ public class ProjectController {
   }
 
   @RequestMapping(value = "/project/share/{projectId}", method = RequestMethod.POST)
-  public ModelAndView addUserToProjectSharedList(@PathVariable ObjectId projectId) {
+  public ModelAndView addUserToProjectSharedList(@PathVariable ObjectId projectId, @RequestParam("usersSelect") ObjectId selectedUser) {
     ModelAndView modelAndView = new ModelAndView();
+    projectService.addUserToSharedWith(selectedUser, projectId);
+    modelAndView.addObject("projectShared", true);
     modelAndView.setViewName("redirect:/project/view/" + projectId);
     return modelAndView;
   }

@@ -56,6 +56,9 @@
             <div th:if="${param.milestoneCreated}" class="alert alert-success" role="alert">
                 Milestone created successfully!
             </div>
+            <div th:if="${param.projectShared}" class="alert alert-success" role="alert">
+                Project shared successfully!
+            </div>
             <div th:if="${project.milestones != null and !project.milestones.isEmpty()}">
                 <div class="card mb-3" th:each="milestone: ${project.milestones}">
                     <div class="card-body">
