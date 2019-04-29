@@ -41,6 +41,11 @@ public class ProjectService {
     return user.getProjects().contains(project.getId());
   }
 
+  public boolean isUserInSharedList(String email, Project project) {
+    User user = userService.findByEmail(email);
+    return project.getSharedWith().contains(user.getId());
+  }
+
   public void addUserToSharedWith(ObjectId userId, ObjectId projectId) {
     Project project = projectRepository.findById(projectId);
     if(!project.getSharedWith().contains(userId)) {
