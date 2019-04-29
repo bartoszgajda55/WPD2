@@ -29,9 +29,16 @@ public class ProjectController {
   public ModelAndView getProjectDetailsPage(@PathVariable ObjectId projectId) {
     ModelAndView modelAndView = new ModelAndView();
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    modelAndView.addObject("isLoggedInUserTheOwner", projectService.isUserOwnerOfTheProject(auth.getName(), projectService.getById(projectId)));
-    modelAndView.addObject("project", projectService.getById(projectId));
-    modelAndView.setViewName("project/view");
+    boolean isOwner = projectService.isUserOwnerOfTheProject(auth.getName(), projectService.getById(projectId));
+    boolean isShared = projectService.isUserInSharedList(auth.getName(), projectService.getById(projectId));
+
+    if (isOwner || isShared) {
+      modelAndView.addObject("isLoggedInUserTheOwner", isOwner);
+      modelAndView.addObject("project", projectService.getById(projectId));
+      modelAndView.setViewName("project/view");
+    } else {
+      modelAndView.setViewName("redirect:/404");
+    }
     return  modelAndView;
   }
 

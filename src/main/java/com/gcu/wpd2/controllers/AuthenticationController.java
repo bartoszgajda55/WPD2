@@ -5,6 +5,7 @@ import com.gcu.wpd2.models.User;
 import com.gcu.wpd2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,4 +58,10 @@ public class AuthenticationController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/404", method = RequestMethod.GET)
+    public ModelAndView view404Page() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404");
+        return modelAndView;
+    }
 }
