@@ -24,6 +24,9 @@
                 <div th:if="${param.projectDeleted}" class="alert alert-success" role="alert">
                     Project deleted successfully!
                 </div>
+                <div th:if="${param.projectShared}" class="alert alert-success" role="alert">
+                    Project shared successfully!
+                </div>
                 <div th:if="${userProjects != null and !userProjects.isEmpty()}">
                     <div class="card mb-3" th:each="project: ${userProjects}">
                         <div class="card-body">
@@ -31,7 +34,6 @@
                             <h6 class="card-subtitle mb-2 text-muted" th:text="${project.getEndDate()}"></h6>
                             <p class="card-text" th:text="${project.getDescription()}"></p>
                             <a th:href="@{/project/view/{projectId}(projectId = ${project.getId()})}" class="btn btn-primary">View</a>
-                            <a href="#" class="btn btn-primary">View</a>
                             <a th:href="@{/project/edit/{projectId}(projectId = ${project.getId()})}" class="btn btn-warning">Edit</a>
                             <a th:href="@{/project/delete/{projectId}(projectId = ${project.getId()})}" class="btn btn-danger">Delete</a>
                         </div>
@@ -44,6 +46,34 @@
                             <h6 class="card-subtitle mb-2 text-muted"></h6>
                             <p class="card-text">You don't have any projects yet. Start by adding your very first one.</p>
                             <a href="#" class="card-link">Add your first Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col">
+                <h2>Projects shared with You</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div th:if="${sharedWith != null and !sharedWith.isEmpty()}">
+                    <div class="card mb-3" th:each="project: ${sharedWith}">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${project.getTitle()}"></h5>
+                            <h6 class="card-subtitle mb-2 text-muted" th:text="${project.getEndDate()}"></h6>
+                            <p class="card-text" th:text="${project.getDescription()}"></p>
+                            <a th:href="@{/project/view/{projectId}(projectId = ${project.getId()})}" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+                <div th:unless="${sharedWith != null and !sharedWith.isEmpty()}">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">No Projects are shared with Me</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"></h6>
+                            <p class="card-text">No one has shared a Project with You. Please contact the Project owner and ask for being added to it.</p>
                         </div>
                     </div>
                 </div>

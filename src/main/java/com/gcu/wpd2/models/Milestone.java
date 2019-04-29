@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Milestone {
   @Id
-  private ObjectId _id;
+  private ObjectId id;
   private String title;
   private String content;
   private String deadline;
@@ -37,7 +37,7 @@ public class Milestone {
   }
 
   public ObjectId getId() {
-    return _id;
+    return id;
   }
 
   public String getTitle() {
@@ -73,7 +73,7 @@ public class Milestone {
   @Override
   public String toString() {
     return "Milestone{" +
-            "_id=" + _id +
+            "_id=" + id +
             ", name='" + title + '\'' +
             ", content='" + content + '\'' +
             ", deadline='" + deadline + '\'' +
@@ -88,11 +88,11 @@ public class Milestone {
 
     Milestone milestone = (Milestone) o;
 
-    return _id != null ? _id.equals(milestone._id) : milestone._id == null;
+    return id != null ? id.equals(milestone.id) : milestone.id == null;
   }
 
   @Override
   public int hashCode() {
-    return _id != null ? _id.hashCode() : 0;
+    return id != null ? id.hashCode() : 0;
   }
 }
