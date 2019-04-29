@@ -34,9 +34,12 @@ public class ProjectService {
     this.projectRepository.save(project);
   }
 
-  public void remove(Project project) {this.projectRepository.delete(project);}
+  public void remove(Project project) { this.projectRepository.delete(project); }
 
-
+  public boolean isUserOwnerOfTheProject(String email, Project project) {
+    User user = userService.findByEmail(email);
+    return user.getProjects().contains(project.getId());
+  }
 
   public void saveToUser(Project project, User user) {
     this.projectRepository.save(project);

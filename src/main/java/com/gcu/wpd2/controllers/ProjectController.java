@@ -27,6 +27,8 @@ public class ProjectController {
   @RequestMapping(value = "/project/view/{projectId}", method = RequestMethod.GET)
   public ModelAndView getProjectDetailsPage(@PathVariable ObjectId projectId) {
     ModelAndView modelAndView = new ModelAndView();
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    modelAndView.addObject("isLoggedInUserTheOwner", projectService.isUserOwnerOfTheProject(auth.getName(), projectService.getById(projectId)));
     modelAndView.addObject("project", projectService.getById(projectId));
     modelAndView.setViewName("project/view");
     return  modelAndView;

@@ -61,7 +61,6 @@ public class Project {
   }
   public void addMilestones(Milestone milestone){
       this.milestones.add(milestone);
-
   }
 
   public List<ObjectId> getSharedWith() {
