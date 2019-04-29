@@ -34,6 +34,21 @@ public class ProjectService {
     this.projectRepository.save(project);
   }
 
+  public void remove(Project project) { this.projectRepository.delete(project); }
+
+  public boolean isUserOwnerOfTheProject(String email, Project project) {
+    User user = userService.findByEmail(email);
+    return user.getProjects().contains(project.getId());
+  }
+
+  public void addUserToSharedWith(ObjectId userId, ObjectId projectId) {
+    Project project = projectRepository.findById(projectId);
+    if(!project.getSharedWith().contains(userId)) {
+      project.getSharedWith().add(userId);
+    }
+    projectRepository.save(project);
+  }
+
   public void saveToUser(Project project, User user) {
     this.projectRepository.save(project);
     user.getProjects().add(project.getId());
@@ -46,6 +61,15 @@ public class ProjectService {
       projects.add(this.getById(objectId));
     });
     return projects;
+  }
+
+  public List<Project> getSharedWithByUserId(ObjectId id) {
+    List<Project> sharedWith = new ArrayList<>();
+    this.projectRepository.findAll().forEach(project -> {
+      if(project.getSharedWith().contains(id))
+        sharedWith.add(project);
+    });
+    return sharedWith;
   }
 
   public Map<ObjectId, String> getTitlesMappedById(String email) {

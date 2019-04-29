@@ -27,9 +27,11 @@ public class DashboardController {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     User user = userService.findByEmail(auth.getName());
     List<Project> projects = projectService.getAllByUserEmail(user.getEmail());
+    List<Project> sharedWith = projectService.getSharedWithByUserId(user.getId());
 
     modelAndView.addObject("currentUser", user);
     modelAndView.addObject("userProjects", projects);
+    modelAndView.addObject("sharedWith", sharedWith);
     modelAndView.setViewName("dashboard");
 
     return modelAndView;

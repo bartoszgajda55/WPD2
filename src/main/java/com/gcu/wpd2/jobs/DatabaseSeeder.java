@@ -1,7 +1,9 @@
 package com.gcu.wpd2.jobs;
 
+import com.gcu.wpd2.db.MilestoneRepository;
 import com.gcu.wpd2.db.ProjectRepository;
 import com.gcu.wpd2.db.UserRepository;
+import com.gcu.wpd2.models.Milestone;
 import com.gcu.wpd2.models.Project;
 import com.gcu.wpd2.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class DatabaseSeeder implements CommandLineRunner {
   private UserRepository userRepository;
   @Autowired
   private ProjectRepository projectRepository;
+  @Autowired
+  private MilestoneRepository milestoneRepository;
 
   @Override
   public void run(String... args) {
@@ -29,11 +33,30 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     Project wpd2 = new Project(null, "WPD2", "Web Platform Development 2", "2019-04-02", "2019-04-06");
     Project ip3 = new Project(null, "IP3", "Integrated Project 3", "2019-04-01", "2019-04-05");
+    Project rspi = new Project(null, "RSPI", "Research Skills and Professional Issues", "2019-04-20", "2019-04-30");
+
+    Milestone mi1 = new Milestone("Design UX", "Implement UX into existing projext");
+    Milestone mi2 = new Milestone("PWA", "Implement Progressive Web Application", "04/02/2020");
+    Milestone mi3 = new Milestone("Responsive Design", "Implement Responsive design for the application", "14/08/2019", true);
+
+    milestoneRepository.save(mi1);
+    milestoneRepository.save(mi2);
+    milestoneRepository.save(mi3);
+
+    wpd2.addMilestones(mi1);
+    wpd2.addMilestones(mi2);
+    wpd2.addMilestones(mi3);
+
+    rspi.addUserToSharedWith(bob);
     projectRepository.save(wpd2);
     projectRepository.save(ip3);
+    projectRepository.save(rspi);
 
     bob.addProject(wpd2.getId());
     bob.addProject(ip3.getId());
+    alice.addProject(rspi.getId());
+
     userRepository.save(bob);
+    userRepository.save(alice);
   }
 }

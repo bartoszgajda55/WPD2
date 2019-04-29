@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Delete Milestone - WPD2</title>
+</head>
+<body>
+<main class="project-page project-edit">
+    <div class="row my-4">
+        <div class="col">
+            <h2>Delete Milestone</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form class="form"  th:action="@{/project/view/{projectId}/milestone/delete/{milestoneId}(projectId = ${projectIdentifier}, milestoneId = ${milestoneIdentifier})}" th:method="delete">
+                <h2>Are you sure you want to delete milestone: <span th:text="${milestoneTitle}"></span></h2>
+                <button type="submit" class="btn btn-danger">Delete Project</button>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

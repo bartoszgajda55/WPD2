@@ -15,22 +15,24 @@ public class Project {
   private String startDate;
   private String endDate;
   private List<Milestone> milestones;
+  private List<ObjectId> sharedWith;
 
   public Project() {
-    this(null, "", "", "", "", new ArrayList<>());
+    this(null, "", "", "", "", new ArrayList<>(), new ArrayList<>());
   }
 
   public Project(ObjectId id, String name, String description, String starDate, String endDate) {
-    this(id, name, description, starDate, endDate, new ArrayList<>());
+    this(id, name, description, starDate, endDate, new ArrayList<>(), new ArrayList<>());
   }
 
-  public Project(ObjectId id, String title, String description, String starDate, String endDate, List<Milestone> milestones) {
+  public Project(ObjectId id, String title, String description, String starDate, String endDate, List<Milestone> milestones, List<ObjectId> sharedWith) {
     this.id = id;
     this.title = title;
     this.description = description;
     this.startDate = starDate;
     this.endDate = endDate;
     this.milestones = milestones;
+    this.sharedWith = sharedWith;
   }
 
   public ObjectId getId() {
@@ -54,7 +56,15 @@ public class Project {
   }
 
   public List<Milestone> getMilestones() {
+
     return milestones;
+  }
+  public void addMilestones(Milestone milestone){
+      this.milestones.add(milestone);
+  }
+
+  public List<ObjectId> getSharedWith() {
+    return sharedWith;
   }
 
   public void setId(ObjectId id) {
@@ -75,6 +85,18 @@ public class Project {
 
   public void setEndDate(String endDate) {
     this.endDate = endDate;
+  }
+
+  public void setMilestones(List<Milestone> milestones) {
+    this.milestones = milestones;
+  }
+
+  public void setSharedWith(List<ObjectId> sharedWith) {
+    this.sharedWith = sharedWith;
+  }
+
+  public void addUserToSharedWith(User user) {
+    this.sharedWith.add(user.getId());
   }
 
   @Override

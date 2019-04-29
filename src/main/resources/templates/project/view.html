@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Project Details - WPD2</title>
+</head>
+<body>
+<main class="viewMore">
+    <div class="row my-4">
+        <div class="col">
+            <h2>Project Details</h2>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <a th:if="${isLoggedInUserTheOwner}" class="btn btn-warning d-flex align-items-center mr-3" th:href="@{/project/share/{projectId}(projectId = ${project.getId()})}">Share</a>
+            <a class="btn btn-primary d-flex align-items-center" th:href="@{/dashboard}">Go back</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th scope="row">Title</th>
+                    <td th:text="${project.getTitle()}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Description</th>
+                    <td th:text="${project.getDescription()}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Start Date</th>
+                    <td th:text="${project.getStartDate()}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">End Date</th>
+                    <td th:text="${project.getEndDate()}"></td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h3>Milestones</h3>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <a class="btn btn-success mb-3"
+               th:href="@{/project/view/{projectId}/milestone/create(projectId = ${project.getId()})}">Add new
+                Milestone</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div th:if="${param.milestoneDeleted}" class="alert alert-success" role="alert">
+                Milestone deleted successfully!
+            </div>
+            <div th:if="${param.milestoneCreated}" class="alert alert-success" role="alert">
+                Milestone created successfully!
+            </div>
+            <div th:if="${param.projectShared}" class="alert alert-success" role="alert">
+                Project shared successfully!
+            </div>
+            <div th:if="${project.milestones != null and !project.milestones.isEmpty()}">
+                <div class="card mb-3" th:each="milestone: ${project.milestones}">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${milestone.getTitle()}"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" th:text="${milestone.getContent()}"></h6>
+                        <p class="card-text" th:text="${milestone.getDeadline()}"></p>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                   th:data="${project.getId()}" th:id="${milestone.getId()}"
+                                   th:checked="${milestone.getIsCompleted()}">
+                            <label class="onoffswitch-label" th:for="${milestone.getId()}">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                        <a class="btn btn-danger"
+                           th:href="@{/project/view/{projectId}/milestone/delete/{milestoneId}(projectId = ${project.getId()}, milestoneId = ${milestone.getId()})}">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div th:unless="${project.milestones != null and !project.milestones.isEmpty()}">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">No Milestones found</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/default :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Share Project - WPD2</title>
+</head>
+<body>
+<main class="project-page project-edit">
+    <div class="row my-4">
+        <div class="col">
+            <h2>Share Project</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form class="form" th:object="${project}" th:action="@{/project/share/{projectId}(projectId = ${project.getId()})}" th:method="post">
+                <input type="hidden" th:value="${project.getId()}" name="id" id="projectId">
+                <label for="usersSelect">Select the User to share Project to</label>
+                <select class="form-control" name="usersSelect" id="usersSelect">
+                    <option th:each="user: ${users}" th:value="${user.getId()}" th:text="${user.getEmail()}"></option>
+                </select>
+                <button type="submit" class="btn btn-primary">Share Project</button>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>
