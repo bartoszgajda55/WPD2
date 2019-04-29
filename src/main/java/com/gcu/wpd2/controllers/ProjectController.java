@@ -29,9 +29,17 @@ public class ProjectController {
   public ModelAndView getProjectDetailsPage(@PathVariable ObjectId projectId) {
     ModelAndView modelAndView = new ModelAndView();
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    modelAndView.addObject("isLoggedInUserTheOwner", projectService.isUserOwnerOfTheProject(auth.getName(), projectService.getById(projectId)));
-    modelAndView.addObject("project", projectService.getById(projectId));
-    modelAndView.setViewName("project/view");
+    boolean isOwner = projectService.isUserOwnerOfTheProject(auth.getName(), projectService.getById(projectId));
+    boolean isShared = projectService.isUserInSharedList(auth.getName(), projectService.getById(projectId));
+
+    if (isOwner || isShared) {
+      modelAndView.addObject("isLoggedInUserTheOwner", isOwner);
+      modelAndView.addObject("project", projectService.getById(projectId));
+      modelAndView.setViewName("project/view");
+    } else {
+      modelAndView.setViewName("redirect:/404");
+    }
+    modelAndView.addObject("currentUser", getCurrentUser());
     return  modelAndView;
   }
 
@@ -40,6 +48,7 @@ public class ProjectController {
   public ModelAndView getCreateProjectPage() {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.addObject(new Project());
+    modelAndView.addObject("currentUser", getCurrentUser());
     modelAndView.setViewName("project/create");
     return  modelAndView;
   }
@@ -59,6 +68,7 @@ public class ProjectController {
     }
     projectService.saveToUser(project, user);
     modelAndView.addObject("projectCreated", true);
+    modelAndView.addObject("currentUser", getCurrentUser());
     modelAndView.setViewName("redirect:/dashboard");
     return modelAndView;
   }
@@ -67,6 +77,7 @@ public class ProjectController {
   public ModelAndView getEditProjectPage(@PathVariable ObjectId projectId) {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.addObject("project", projectService.getById(projectId));
+    modelAndView.addObject("currentUser", getCurrentUser());
     modelAndView.setViewName("project/edit");
     return modelAndView;
   }
@@ -76,6 +87,7 @@ public class ProjectController {
     ModelAndView modelAndView = new ModelAndView();
     this.projectService.update(project);
     modelAndView.addObject("projectUpdated", true);
+    modelAndView.addObject("currentUser", getCurrentUser());
     modelAndView.setViewName("redirect:/dashboard");
     return modelAndView;
   }
@@ -84,6 +96,7 @@ public class ProjectController {
   public ModelAndView getDeleteProjectPage(@PathVariable ObjectId projectId) {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.addObject("project", projectService.getById(projectId));
+    modelAndView.addObject("currentUser", getCurrentUser());
     modelAndView.setViewName("project/delete");
     return modelAndView;
   }
@@ -96,6 +109,7 @@ public class ProjectController {
     this.userService.deleteUserProjectByEmail(user.getEmail(), project.getId());
     this.projectService.delete(project);
     modelAndView.addObject("projectDeleted", true);
+    modelAndView.addObject("currentUser", getCurrentUser());
     modelAndView.setViewName("redirect:/dashboard");
     return modelAndView;
   }
@@ -105,6 +119,7 @@ public class ProjectController {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.addObject("project", projectService.getById(projectId));
     modelAndView.addObject("users", userService.getAll());
+    modelAndView.addObject("currentUser", getCurrentUser());
     modelAndView.setViewName("project/share");
     return modelAndView;
   }
@@ -114,7 +129,13 @@ public class ProjectController {
     ModelAndView modelAndView = new ModelAndView();
     projectService.addUserToSharedWith(selectedUser, projectId);
     modelAndView.addObject("projectShared", true);
+    modelAndView.addObject("currentUser", getCurrentUser());
     modelAndView.setViewName("redirect:/project/view/" + projectId);
     return modelAndView;
+  }
+
+  User getCurrentUser() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    return userService.findByEmail(auth.getName());
   }
 }

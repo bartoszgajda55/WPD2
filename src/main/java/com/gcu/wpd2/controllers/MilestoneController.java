@@ -5,6 +5,7 @@ import com.gcu.wpd2.models.Project;
 import com.gcu.wpd2.models.User;
 import com.gcu.wpd2.services.MilestoneService;
 import com.gcu.wpd2.services.ProjectService;
+import com.gcu.wpd2.services.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,17 +22,18 @@ import java.util.Map;
 
 @Controller
 public class MilestoneController {
-
     @Autowired
     private MilestoneService milestoneService;
-
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/milestone/view/{milestoneId}", method = RequestMethod.GET)
     public ModelAndView getProjectDetailsPage(@PathVariable ObjectId milestoneId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("milestone",milestoneService.getByID(milestoneId));
+        modelAndView.addObject("currentUser", getCurrentUser());
         modelAndView.setViewName("project/view");
         return  modelAndView;
     }
@@ -40,6 +42,7 @@ public class MilestoneController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("projectId", projectId);
         modelAndView.addObject(new Milestone());
+        modelAndView.addObject("currentUser", getCurrentUser());
         modelAndView.setViewName("milestone/create");
         return modelAndView;
     }
@@ -50,6 +53,7 @@ public class MilestoneController {
         Project project = projectService.getById(projectId);
         milestoneService.saveToProject(milestone, project);
         modelAndView.addObject("milestoneCreated", true);
+        modelAndView.addObject("currentUser", getCurrentUser());
         modelAndView.setViewName("redirect:/project/view/" + projectId);
         return modelAndView;
     }
@@ -59,6 +63,7 @@ public class MilestoneController {
         modelAndView.addObject("milestoneIdentifier", milestoneId);
         modelAndView.addObject("projectIdentifier", projectId);
         modelAndView.addObject("milestoneTitle", milestoneService.getByID(milestoneId).getTitle());
+        modelAndView.addObject("currentUser", getCurrentUser());
         modelAndView.setViewName("milestone/delete");
         return modelAndView;
     }
@@ -70,6 +75,7 @@ public class MilestoneController {
         milestoneService.deleteMilestoneFromProject(milestone, projectId);
         milestoneService.delete(milestone);
         modelAndView.addObject("milestoneDeleted", true);
+        modelAndView.addObject("currentUser", getCurrentUser());
         modelAndView.setViewName("redirect:/project/view/" + projectId);
         return modelAndView;
     }
@@ -81,4 +87,8 @@ public class MilestoneController {
         return true;
     }
 
+    User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userService.findByEmail(auth.getName());
+    }
 }
